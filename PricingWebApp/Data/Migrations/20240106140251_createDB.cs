@@ -50,7 +50,7 @@ namespace PricingWebApp.Data.Migrations
 				});
 				
 				migrationBuilder.CreateTable(
-				name: "Users",
+				name: "Employees",
 				columns: table => new
 				{
 					Id = table.Column<string>(nullable: false),
@@ -62,7 +62,7 @@ namespace PricingWebApp.Data.Migrations
 				},
 				constraints: table =>
 				{
-					table.PrimaryKey("PK_User", x => x.Id);
+					table.PrimaryKey("PK_Employee", x => x.Id);
 				});
 				
 						migrationBuilder.CreateTable(
@@ -72,7 +72,7 @@ namespace PricingWebApp.Data.Migrations
 					Id = table.Column<string>(nullable: false),
 				  	ProjectId = table.Column<string>(nullable: false),
 					ServiceId = table.Column<string>(nullable: false),
-					UserId = table.Column<string>(nullable: false),
+					EmployeeId = table.Column<string>(nullable: false),
 					Service_cost = table.Column<bool>( nullable: false),
 					count = table.Column<int>( nullable: false),
 					fix_cost = table.Column<bool>( nullable: false),
@@ -97,9 +97,9 @@ namespace PricingWebApp.Data.Migrations
 						onDelete: ReferentialAction.Cascade);
 						
 						 table.ForeignKey(
-						name: "PK_User",
-						column: x => x.UserId,
-						principalTable: "Users",
+						name: "PK_Employee",
+						column: x => x.EmployeeId,
+						principalTable: "Employees",
 						principalColumn: "Id",
 						onDelete: ReferentialAction.Cascade);
 				});
