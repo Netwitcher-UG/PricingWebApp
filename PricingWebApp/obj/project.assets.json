@@ -2454,19 +2454,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\anass\\.nuget\\packages\\": {}
+    "C:\\Users\\basel\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\anass\\source\\repos\\Neuer Ordner\\PricingWebApp\\PricingWebApp.csproj",
+      "projectUniqueName": "C:\\Users\\basel\\Source\\Repos\\master\\PricingWebApp\\PricingWebApp.csproj",
       "projectName": "PricingWebApp",
-      "projectPath": "C:\\Users\\anass\\source\\repos\\Neuer Ordner\\PricingWebApp\\PricingWebApp.csproj",
-      "packagesPath": "C:\\Users\\anass\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\anass\\source\\repos\\Neuer Ordner\\PricingWebApp\\obj\\",
+      "projectPath": "C:\\Users\\basel\\Source\\Repos\\master\\PricingWebApp\\PricingWebApp.csproj",
+      "packagesPath": "C:\\Users\\basel\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\basel\\Source\\Repos\\master\\PricingWebApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\anass\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\basel\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -2532,7 +2532,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.417\\RuntimeIdentifierGraph.json"
       }
     }
   }

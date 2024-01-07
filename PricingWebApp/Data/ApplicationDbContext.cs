@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using PricingWebApp.Models;
 
 namespace PricingWebApp.Data
 {
@@ -9,5 +10,7 @@ namespace PricingWebApp.Data
             : base(options)
         {
         }
+        // fix costs database
+        public DbSet<FixCosts> FixCosts { get; set; }
     }
 }
