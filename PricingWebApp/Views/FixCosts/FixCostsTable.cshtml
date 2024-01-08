@@ -1,105 +1,125 @@
 @model IEnumerable<FixCosts>
-
 @{
     ViewData["Title"] = "Fix Cost Table";
 }
 
-<div class="w-100 text-center">
-    <h1 class="font-weight-bold font-family:  sans-serif;">Fix Cost Table</h1>
-</div>
 
-@if(Model.Any()){
-    <div class="card">
-        <div class="w-100 card-header d-flex justify-content-between ">
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <h1 class="card-title w-100 text-center font-weight-bold font-family:sans-serif;" style="font-size:40px;">Fix Cost Table</h1>
+            <div class="col-12">
 
-            <div class="w-50">
-                <a id="mybtn" data-toggle="modal" data-target="#addone"
-                   class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Fix Cost</a>
-                @await Html.PartialAsync("_NewFixCost", new FixCosts())
-            </div>
-            <div class=" " style=" padding-left:25%">
-                <form asp-action="FixCostsTableSearch" asp-controller="FixCosts" method="get"
-                    class="d-flex justify-content-between w-20 ">
-                    <div class="input-group-append w-20">
-                        <input type="submit" value="Search" class="btn btn-primary w-20" />
+                @if (Model.Any())
+                {
+                    <div class="card">
+
+                        <div class="card-header">
+
+                            <div class="w-50">
+                                <a id="mybtn" data-toggle="modal" data-target="#addone"
+                               class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Fix Cost</a>
+                                @await Html.PartialAsync("_NewFixCost", new FixCosts())
+                            </div>
+
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <table id="example1" class="table table-bordered table-striped " style="font-size:18px;">
+                                <thead>
+                                    <tr>
+                                        <th>Fix Cost Mame</th>
+                                        <th>Cost</th>
+                                        <th>Date of Update</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var fixcost in Model)
+                                    {
+                                        try
+                                        {
+                                            <tr>
+                                                <td class="text-center">
+                                                    @fixcost.Title
+                                                </td>
+                                                <td width="20%" class="text-center">
+                                                    @fixcost.Cost
+                                                </td>
+                                                <td width="25%" class="text-center">
+                                                    @fixcost.Date.ToShortDateString()
+                                                </td>
+                                                <td width="10%">
+                                                    <a data-url='@Url.Action($"_EditFixCost/{fixcost.Id}")'
+                                           id="edit+@fixcost.Id" data-toggle="modal"
+                                           data-target='#EditOne-@fixcost.Id' class="btn btn-success text-center "><i class="bi bi-eye"></i> Edit</a>
+                                                    @await Html.PartialAsync("_EditFixCost", fixcost)
+                                                </td>
+
+                                                <td width="10%">
+                                                    <a data-url='@Url.Action($"_DeleteFixCost/{fixcost.Id}")'
+                                           id="delete+@fixcost.Id" data-toggle="modal"
+                                           data-target='#DeleteOne-@fixcost.Id' class="btn btn-danger text-left"><i class="bi bi-trash"></i> Delete</a>
+                                                    @await Html.PartialAsync("_DeleteFixCost", fixcost)
+                                                </td>
+
+                                            </tr>
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            <partial>@ex.Message</partial>
+                                        }
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Fix Cost Mame</th>
+                                        <th>Cost</th>
+                                        <th>Date of Update</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
                     </div>
-                    <input type="search" name="values" asp-route-x="waelll" class="form-control" value='@ViewData["values"]' />
-                
-                </form>
+
+                }
+                else
+                {
+                    <div class=" ">
+                        <a id="mybtn" data-toggle="modal" data-target="#addone"
+                       class="" style="text-decoration: none;cursor: pointer; "><i class="bi bi-plus"></i> Add New Fix Cost</a>
+                        @await Html.PartialAsync("_NewFixCost", new FixCosts())
+                        <p class="font-weight-bold text-center mt-5">No fix costs . Let's add a fix cost ...</p>
+                    </div>
+                }
+                <!-- /.card -->
             </div>
+            <!-- /.col -->
         </div>
-
-        <div class="card-body">
-            <table id="example1" class="table table-bordered table-striped">
-
-                <thead>
-                    <tr class="text-center font-weight-bold">
-                        <th>Fix Cost Name</th>
-                        <th>Cost</th>
-                        <th>Date of Update <a asp-action="SortByDate" asp-route-types='@ViewData["typesIcon"]'
-                                class=" text-success"><i class='bi bi-arrow-@ViewData["typesIcon"]'></i></a>
-                        </th>
-                        <th colspan="2"></th>
-                    </tr>
-                </thead>
-
-                <tbody>
-                    @foreach (var fixcost in Model)
-                    {
-                        try
-                        {
-                            <tr>
-                                <td class="text-center">
-                                    @fixcost.Title
-                                </td>
-                                <td width="20%" class="text-center">
-                                    @fixcost.Cost
-                                </td>
-                                <td width="25%" class="text-center">
-                                    @fixcost.Date.ToShortDateString()
-                                </td>
-                                <td width="10%">
-                                    <a  data-url='@Url.Action($"_EditFixCost/{fixcost.Id}")'
-                                     id="edit+@fixcost.Id" data-toggle="modal"
-                                     data-target='#EditOne-@fixcost.Id' class="btn btn-success text-center "><i class="bi bi-eye"></i> Edit</a>
-                                    @await Html.PartialAsync("_EditFixCost", fixcost)
-                                </td>
-
-                                <td width="10%">
-                                    <a  data-url='@Url.Action($"_DeleteFixCost/{fixcost.Id}")'
-                                    id="delete+@fixcost.Id" data-toggle="modal"
-                                    data-target='#DeleteOne-@fixcost.Id' class="btn btn-danger text-left"><i class="bi bi-trash"></i> Delete</a>
-                                    @await Html.PartialAsync("_DeleteFixCost", fixcost)
-                                </td>
-
-                            </tr>
-                        }
-                        catch (Exception ex)
-                        {
-                            <partial>@ex.Message</partial>
-                        }
-                        }
-                </tbody>
-            </table>
-        </div>
+        <!-- /.row -->
     </div>
-}else{
-    <div class=" ">
-            <a  id="mybtn" data-toggle="modal" data-target="#addone"
-       class="" style="text-decoration: none;cursor: pointer; "><i class="bi bi-plus"></i> Add New Fix Cost</a>
-            @await Html.PartialAsync("_NewFixCost", new FixCosts())
-        <p class="font-weight-bold text-center mt-5">No fix costs . Let's add a fix cost ...</p>
-    </div>
-}
+    <!-- /.container-fluid -->
+</section>
+<!-- /.content -->
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
 
-@if(TempData["basel"] != null){
-   
-<script type="text/javascript">
-       const link = document.getElementById("mybtn");
+
+
+<!-- reopen popup NewFixCost -->
+@if (ViewData["reopenPopupNew"] != null)
+{
+    <script type="text/javascript">
+        const link = document.getElementById("mybtn");
         setTimeout(() => {
-             link.click();
-        }, 1000);      
-</script>
+            link.click();
+        }, 500);
+    </script>
 }
-
-
