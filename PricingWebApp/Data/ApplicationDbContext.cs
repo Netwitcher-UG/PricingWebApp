@@ -12,5 +12,7 @@ namespace PricingWebApp.Data
         }
         // fix costs database
         public DbSet<FixCosts> FixCosts { get; set; }
+        // employees database
+        public DbSet<Employees> Employees { get; set; }
     }
 }
