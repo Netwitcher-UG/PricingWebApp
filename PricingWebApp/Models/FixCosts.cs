@@ -1,8 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace PricingWebApp.Models
 {
-    //Ms.Anas Delete this file when you finish testing it because Walaa will create it
     public class FixCosts
     {
         [Key]
@@ -10,7 +9,11 @@ namespace PricingWebApp.Models
         [Required]
         public string? Title { get; set; }
         [Required]
-        public decimal Cost { get; set; }
+        public double monthlyCost { get; set; }
+        public double Cost { get; set; }
+
         public DateTime Date { get; set; } = DateTime.Now;
+
+        public DateTime lastUpdate { get; set; } = DateTime.Now;
     }
 }
