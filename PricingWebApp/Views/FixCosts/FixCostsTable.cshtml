@@ -26,11 +26,13 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped " style="font-size:18px;">
+                            <table id="example1" class="table table-bordered table-striped " style="font-size:15px;">
                                 <thead>
                                     <tr>
-                                        <th>Fix Cost Mame</th>
+                                        <th>Fix Cost Name</th>
+                                        <th>monthly Cost</th>
                                         <th>Cost</th>
+                                        <th>Date</th>
                                         <th>Date of Update</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -45,11 +47,23 @@
                                                 <td class="text-center">
                                                     @fixcost.Title
                                                 </td>
-                                                <td width="20%" class="text-center">
+                                                <td  class="text-center">
+                                                    @fixcost.monthlyCost
+                                                </td>
+                                                <td  class="text-center">
                                                     @fixcost.Cost
                                                 </td>
-                                                <td width="25%" class="text-center">
-                                                    @fixcost.Date.ToShortDateString()
+                                                <td class="text-center">
+                                                    @fixcost.Date.ToString("dd-MM-yyyy")
+                                                </td>
+                                                <td  class="text-center">
+                                                    @if (fixcost.lastUpdate.ToString() == fixcost.Date.ToString())
+                                                    {
+                                                        <p>-</p>
+                                                    }else{
+                                                        @fixcost.lastUpdate.ToString("dd-MM-yyyy")
+                                                    }
+                                                    
                                                 </td>
                                                 <td width="10%">
                                                     <a data-url='@Url.Action($"_EditFixCost/{fixcost.Id}")'
@@ -76,7 +90,9 @@
                                 <tfoot>
                                     <tr>
                                         <th>Fix Cost Mame</th>
+                                        <th>monthly Cost</th>
                                         <th>Cost</th>
+                                        <th>Date</th>
                                         <th>Date of Update</th>
                                         <th>Edit</th>
                                         <th>Delete</th>

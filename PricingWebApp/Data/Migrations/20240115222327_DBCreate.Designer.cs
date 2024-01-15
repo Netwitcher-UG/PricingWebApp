@@ -12,7 +12,7 @@ using PricingWebApp.Data;
 namespace PricingWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240114233429_DBCreate")]
+    [Migration("20240115222327_DBCreate")]
     partial class DBCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

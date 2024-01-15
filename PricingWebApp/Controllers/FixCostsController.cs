@@ -32,6 +32,7 @@ namespace PricingWebApp.Controllers
         public IActionResult NewFixCost()
         {
             ViewBag.Cost = 0;
+            ViewBag.monthlyCost = 0;
             ViewData["reopenPopupNew"] = null;
             try
             {
@@ -60,6 +61,7 @@ namespace PricingWebApp.Controllers
                 {
                     ViewData["reopenPopupNew"] = "reopen";
                     if (fixcost.Title != null) { ViewBag.FixCostName = fixcost.Title; }
+                    ViewBag.monthlyCost = fixcost.monthlyCost;
                     ViewBag.Cost = fixcost.Cost;
 
 

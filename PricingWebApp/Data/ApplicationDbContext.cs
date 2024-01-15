@@ -10,7 +10,7 @@ namespace PricingWebApp.Data
             : base(options)
         {
         }
-        // fix costs database
+        
         public DbSet<FixCosts> FixCosts { get; set; }
         public DbSet<Servises> Servises { get; set; }
         public DbSet<Projects> Projects { get; set; }

@@ -3,15 +3,16 @@
 <div class="modal fade" id="EditOne-@Model.Id">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header text-white" style="background-color: #462746;">
                 <h5 class="modal-title">Edit Fix Cost</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
             <form method="post" asp-action="_EditFixCost">
-
+                <input asp-for="Date" hidden />
+                <input asp-for="Id" hidden />
                 <div class="border p-3 bt-4">
                     <div class="mb-3">
                         <label asp-for="Title">Fix Cost Name</label>
@@ -19,16 +20,35 @@
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="Cost"></label>
-                        <input asp-for="Cost" class="form-control" autocomplete="off" required>
-                        <span asp-validation-for="Cost" class="text-danger"></span>
+                        <label asp-for="monthlyCost">monthly Cost</label>
+                        <div class="input-group">
+                            <input asp-for="monthlyCost" class="form-control" autocomplete="off" min="0" required>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="bi bi-currency-euro font-weight-bold"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="monthlyCost" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <input asp-for="Id" type="hidden" class="form-control" />
+                        <label asp-for="Cost"></label>
+                        <div class="input-group">
+                            <input asp-for="Cost" class="form-control" autocomplete="off" min="0" required>
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="bi bi-currency-euro font-weight-bold"></i>
+                                </span>
+                            </div>
+                        </div>
+                        <span asp-validation-for="Cost" class="text-danger"></span>
                     </div>
                     <br>
-                    <button type="submit" class="btn btn-primary" style="width:150px">Update</button>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn text-white btn-primary" style="width:80px;">Update</button>
+                    <button type="button" class="btn text-white btn-danger" style="width: 80px;"
+                            data-dismiss="modal">
+                        Cancel
+                    </button>
                 </div>
 
             </form>
