@@ -19,16 +19,12 @@
 
                     </div>
                     <div class="mb-3">
-                        <label asp-for="monthlyCost">monthly Cost :</label>
-                        <span class=""> @Model.monthlyCost <i class="bi bi-currency-euro"></i></span>
+                        <label asp-for="MonthlyCost">monthly Cost :</label>
+                        <span class=""> @Model.MonthlyCost <i class="bi bi-currency-euro"></i></span>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="Cost">Cost :</label>
-                        <span class=""> @Model.Cost <i class="bi bi-currency-euro"></i></span>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="lastUpdate">last Update :</label>
-                        <span class="">@Model.lastUpdate.ToString("dd-MM-yyyy")</span>
+                        <label asp-for="LastUpdate">last Update :</label>
+                        <span class="">@Model.LastUpdate.ToString("dd-MM-yyyy")</span>
                     </div>
                     <br>
                     <button type="submit" class="btn text-white btn-primary" style="width:80px;">Delete</button>

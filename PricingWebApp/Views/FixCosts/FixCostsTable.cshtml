@@ -30,8 +30,6 @@
                                     <tr>
                                         <th>Fix Cost Name</th>
                                         <th>monthly Cost</th>
-                                        <th>Cost</th>
-                                        <th>Date</th>
                                         <th>Date of Update</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -47,22 +45,10 @@
                                                     @fixcost.Title
                                                 </td>
                                                 <td  class="text-center">
-                                                    @fixcost.monthlyCost
+                                                    @fixcost.MonthlyCost
                                                 </td>
                                                 <td  class="text-center">
-                                                    @fixcost.Cost
-                                                </td>
-                                                <td class="text-center">
-                                                    @fixcost.Date.ToString("dd-MM-yyyy")
-                                                </td>
-                                                <td  class="text-center">
-                                                    @if (fixcost.lastUpdate.ToString() == fixcost.Date.ToString())
-                                                    {
-                                                        <p>-</p>
-                                                    }else{
-                                                        @fixcost.lastUpdate.ToString("dd-MM-yyyy")
-                                                    }
-                                                    
+                                                    @fixcost.LastUpdate.ToString("dd-MM-yyyy")
                                                 </td>
                                                 <td width="10%">
                                                     <a data-url='@Url.Action($"_EditFixCost/{fixcost.Id}")'
@@ -90,8 +76,6 @@
                                     <tr>
                                         <th>Fix Cost Mame</th>
                                         <th>monthly Cost</th>
-                                        <th>Cost</th>
-                                        <th>Date</th>
                                         <th>Date of Update</th>
                                         <th>Edit</th>
                                         <th>Delete</th>

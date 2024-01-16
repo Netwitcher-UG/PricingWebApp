@@ -12,7 +12,7 @@ using PricingWebApp.Data;
 namespace PricingWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240115222327_DBCreate")]
+    [Migration("20240116154728_DBCreate")]
     partial class DBCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -256,21 +256,15 @@ namespace PricingWebApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double>("Cost")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("MonthlyCost")
+                        .HasColumnType("float");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("lastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("monthlyCost")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 

@@ -254,21 +254,15 @@ namespace PricingWebApp.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<double>("Cost")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
+
+                    b.Property<double>("MonthlyCost")
+                        .HasColumnType("float");
 
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("lastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("monthlyCost")
-                        .HasColumnType("float");
 
                     b.HasKey("Id");
 
