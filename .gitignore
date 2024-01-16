@@ -12,3 +12,9 @@
 /PricingWebApp/obj/PricingWebApp.csproj.nuget.g.props
 /PricingWebApp/obj/project.assets.json
 /PricingWebApp/obj/project.nuget.cache
+/PricingWebApp/bin/
+/PricingWebApp/appsettings.json
+/PricingWebApp/obj/
+/PricingWebApp/obj/PricingWebApp.csproj.nuget.g.props
+/PricingWebApp/obj/project.assets.json
+/PricingWebApp/obj/project.nuget.cache
