@@ -3,23 +3,6 @@
 ################################################################################
 
 /.vs
-/PricingWebApp/bin/Debug/net6.0/PricingWebApp.dll
-/PricingWebApp/bin/Debug/net6.0/appsettings.json
-/PricingWebApp/bin/Debug/net6.0/PricingWebApp.exe
-/PricingWebApp/bin/Debug/net6.0/PricingWebApp.pdb
-/PricingWebApp/bin/Debug/net6.0/PricingWebApp.staticwebassets.runtime.json
-/PricingWebApp/obj/Debug/net6.0/apphost.exe
-/PricingWebApp/obj/Debug/net6.0/PricingWebApp.AssemblyInfo.cs
-/PricingWebApp/obj/Debug/net6.0/PricingWebApp.AssemblyInfoInputs.cache
-/PricingWebApp/obj/Debug/net6.0/PricingWebApp.csproj.CoreCompileInputs.cache
-/PricingWebApp/obj/Debug/net6.0/PricingWebApp.csproj.FileListAbsolute.txt
-/PricingWebApp/obj/Debug/net6.0/PricingWebApp.dll
-/PricingWebApp/obj/Debug/net6.0/PricingWebApp.genruntimeconfig.cache
-/PricingWebApp/obj/Debug/net6.0/PricingWebApp.pdb
-/PricingWebApp/obj/Debug/net6.0/PricingWebApp.sourcelink.json
-/PricingWebApp/obj/Debug/net6.0/staticwebassets.build.json
-/PricingWebApp/obj/Debug/net6.0/staticwebassets.development.json
-/PricingWebApp/obj/Debug/net6.0/staticwebassets.pack.json
-/PricingWebApp/obj/Debug/net6.0/refint/PricingWebApp.dll
-/PricingWebApp/obj/Debug/net6.0/ref/PricingWebApp.dll
-/PricingWebApp/obj/Debug/net6.0/project.razor.vs.bin
+/PricingWebApp/bin/
+/PricingWebApp/obj/
+/PricingWebApp/appsettings.json
