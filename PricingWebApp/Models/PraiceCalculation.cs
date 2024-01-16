@@ -2,11 +2,11 @@ namespace PricingWebApp.Models
 {
     public class PraiceCalculation
     {
-        public int ID { get; set; }
+        public int Id { get; set; }
 
-        public Employes? UserID { get; set; }
-        public Servises? ServiseID { get; set; }
-        public Projects? ProjectID { get; set; }
+        public Employes? User { get; set; }
+        public Servises? Servise { get; set; }
+        public Projects? Project { get; set; }
         public double ServiseCost { get; set; }
 
         public int count { get; set; }

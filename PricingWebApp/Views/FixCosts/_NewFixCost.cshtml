@@ -17,12 +17,12 @@
                         <label asp-for="Title">Fix Cost Name</label>
                         <input asp-for="Title" class="form-control" autocomplete="off" value="@ViewBag.FixCostName" required>
 
-                        <span asp-validation-for="Title" class="text-danger">@TempData["Error"]</span>
+                        <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="monthlyCost">monthly Cost</label>
+                        <label asp-for="MonthlyCost">monthly Cost</label>
                         <div class="input-group">
-                            <input asp-for="monthlyCost" type="number" class="form-control" autocomplete="off"
+                            <input asp-for="MonthlyCost" type="number" class="form-control" autocomplete="off"
                                    value="@ViewBag.monthlyCost" min="0" required>
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
@@ -31,21 +31,7 @@
                             </div>
 
                         </div>
-                        <span asp-validation-for="monthlyCost" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="Cost"></label>
-                        <div class="input-group">
-                            <input asp-for="Cost" type="number" class="form-control" autocomplete="off"
-                                   value="@ViewBag.Cost" min="0" required>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="bi bi-currency-euro font-weight-bold"></i>
-                                </span>
-                            </div>
-
-                        </div>
-                        <span asp-validation-for="Cost" class="text-danger"></span>
+                        <span asp-validation-for="MonthlyCost" class="text-danger"></span>
                     </div>
                     <br>
                     <button type="submit" class="btn text-white btn-primary" style="width:80px;">Save</button>

@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using PricingWebApp.Data;
 using PricingWebApp.Models;
 
@@ -31,7 +31,7 @@ namespace PricingWebApp.Controllers
         [HttpGet, ActionName("_NewFixCost")]
         public IActionResult NewFixCost()
         {
-            ViewBag.Cost = 0;
+            
             ViewBag.monthlyCost = 0;
             ViewData["reopenPopupNew"] = null;
             try
@@ -61,10 +61,7 @@ namespace PricingWebApp.Controllers
                 {
                     ViewData["reopenPopupNew"] = "reopen";
                     if (fixcost.Title != null) { ViewBag.FixCostName = fixcost.Title; }
-                    ViewBag.monthlyCost = fixcost.monthlyCost;
-                    ViewBag.Cost = fixcost.Cost;
-
-
+                    ViewBag.monthlyCost = fixcost.MonthlyCost;
                     IEnumerable<FixCosts> fixCosts = _context.FixCosts.ToList();
                     return View("FixCostsTable", fixCosts);
                 }

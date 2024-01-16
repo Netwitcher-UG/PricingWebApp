@@ -3,8 +3,8 @@ namespace PricingWebApp.Models
     public class Price_Packages
     {
 
-        public int id { get; set; }
-        public PraiceCalculation? PraiceCalculationID { get; set; }
+        public int Id { get; set; }
+        public PraiceCalculation? PraiceCalculation { get; set; }
 
         public int WinPerc { get; set; }
         public int Discount { get; set; }

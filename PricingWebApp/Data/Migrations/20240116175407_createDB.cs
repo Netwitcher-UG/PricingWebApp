@@ -1,28 +1,32 @@
-﻿using System;
+using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace PricingWebApp.Data.Migrations
 {
-    public partial class DBCreate : Migration
+    public partial class createDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+
             migrationBuilder.CreateTable(
-                name: "Employes",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Section = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HourRate = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Employes", x => x.Id);
-                });
+             name: "Employes",
+             columns: table => new
+             {
+                 Id = table.Column<int>(type: "int", nullable: false)
+                     .Annotation("SqlServer:Identity", "1, 1"),
+                 Admin = table.Column<bool>(type: "bit", nullable: false),
+                 Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                 First_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                 HourRate = table.Column<double>(type: "float", nullable: false),
+                 Last_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                 PhoneNo = table.Column<int>(type: "int", nullable: false)
+             },
+             constraints: table =>
+             {
+                 table.PrimaryKey("PK_Employes", x => x.Id);
+             });
 
             migrationBuilder.CreateTable(
                 name: "FixCosts",
@@ -30,11 +34,11 @@ namespace PricingWebApp.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    monthlyCost = table.Column<double>(type: "float", nullable: false),
                     Cost = table.Column<double>(type: "float", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    lastUpdate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastUpdate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    MonthlyCost = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,96 +62,96 @@ namespace PricingWebApp.Data.Migrations
                 name: "Servises",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Servises", x => x.id);
+                    table.PrimaryKey("PK_Servises", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
                 name: "PraiceCalculation",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    EmployeidId = table.Column<int>(type: "int", nullable: true),
-                    Serviseidid = table.Column<int>(type: "int", nullable: true),
-                    ProjectidId = table.Column<int>(type: "int", nullable: true),
+                    ProjectId = table.Column<int>(type: "int", nullable: true),
+                    ServiseId = table.Column<int>(type: "int", nullable: true),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    FixCost = table.Column<double>(type: "float", nullable: false),
                     ServiseCost = table.Column<double>(type: "float", nullable: false),
-                    count = table.Column<int>(type: "int", nullable: false),
-                    fixCost = table.Column<double>(type: "float", nullable: false)
+                    count = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PraiceCalculation", x => x.id);
+                    table.PrimaryKey("PK_PraiceCalculation", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PraiceCalculation_Employes_EmployeidId",
-                        column: x => x.EmployeidId,
+                        name: "FK_PraiceCalculation_Employes_UserId",
+                        column: x => x.UserId,
                         principalTable: "Employes",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PraiceCalculation_Projects_ProjectidId",
-                        column: x => x.ProjectidId,
+                        name: "FK_PraiceCalculation_Projects_ProjectId",
+                        column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PraiceCalculation_Servises_Serviseidid",
-                        column: x => x.Serviseidid,
+                        name: "FK_PraiceCalculation_Servises_ServiseId",
+                        column: x => x.ServiseId,
                         principalTable: "Servises",
-                        principalColumn: "id");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
                 name: "Price_Packages",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PraiceCalculationIDid = table.Column<int>(type: "int", nullable: true),
-                    winperc = table.Column<int>(type: "int", nullable: false),
-                    discount = table.Column<int>(type: "int", nullable: false),
-                    defaultpack = table.Column<double>(type: "float", nullable: false),
-                    secondpack = table.Column<double>(type: "float", nullable: false),
-                    thirdpack = table.Column<double>(type: "float", nullable: false)
+                    PraiceCalculationId = table.Column<int>(type: "int", nullable: true),
+                    DefaultPack = table.Column<double>(type: "float", nullable: false),
+                    Discount = table.Column<int>(type: "int", nullable: false),
+                    SecondPack = table.Column<double>(type: "float", nullable: false),
+                    ThirdPack = table.Column<double>(type: "float", nullable: false),
+                    WinPerc = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Price_Packages", x => x.id);
+                    table.PrimaryKey("PK_Price_Packages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Price_Packages_PraiceCalculation_PraiceCalculationIDid",
-                        column: x => x.PraiceCalculationIDid,
+                        name: "FK_Price_Packages_PraiceCalculation_PraiceCalculationId",
+                        column: x => x.PraiceCalculationId,
                         principalTable: "PraiceCalculation",
-                        principalColumn: "id");
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PraiceCalculation_EmployeidId",
+                name: "IX_PraiceCalculation_ProjectId",
                 table: "PraiceCalculation",
-                column: "EmployeidId");
+                column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PraiceCalculation_ProjectidId",
+                name: "IX_PraiceCalculation_ServiseId",
                 table: "PraiceCalculation",
-                column: "ProjectidId");
+                column: "ServiseId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PraiceCalculation_Serviseidid",
+                name: "IX_PraiceCalculation_UserId",
                 table: "PraiceCalculation",
-                column: "Serviseidid");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Price_Packages_PraiceCalculationIDid",
+                name: "IX_Price_Packages_PraiceCalculationId",
                 table: "Price_Packages",
-                column: "PraiceCalculationIDid");
+                column: "PraiceCalculationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "FixCosts");
+                 name: "FixCosts");
 
             migrationBuilder.DropTable(
                 name: "Price_Packages");

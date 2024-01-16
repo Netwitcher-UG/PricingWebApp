@@ -12,8 +12,8 @@ using PricingWebApp.Data;
 namespace PricingWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240115222327_DBCreate")]
-    partial class DBCreate
+    [Migration("20240116175407_createDB")]
+    partial class createDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -226,159 +226,6 @@ namespace PricingWebApp.Data.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("PricingWebApp.Models.Employes", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<double>("HourRate")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Section")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Employes");
-                });
-
-            modelBuilder.Entity("PricingWebApp.Models.FixCosts", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<double>("Cost")
-                        .HasColumnType("float");
-
-                    b.Property<DateTime>("Date")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("lastUpdate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<double>("monthlyCost")
-                        .HasColumnType("float");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("FixCosts");
-                });
-
-            modelBuilder.Entity("PricingWebApp.Models.PraiceCalculation", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
-                    b.Property<int?>("EmployeidId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProjectidId")
-                        .HasColumnType("int");
-
-                    b.Property<double>("ServiseCost")
-                        .HasColumnType("float");
-
-                    b.Property<int?>("Serviseidid")
-                        .HasColumnType("int");
-
-                    b.Property<int>("count")
-                        .HasColumnType("int");
-
-                    b.Property<double>("fixCost")
-                        .HasColumnType("float");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("EmployeidId");
-
-                    b.HasIndex("ProjectidId");
-
-                    b.HasIndex("Serviseidid");
-
-                    b.ToTable("PraiceCalculation");
-                });
-
-            modelBuilder.Entity("PricingWebApp.Models.Price_Packages", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
-                    b.Property<int?>("PraiceCalculationIDid")
-                        .HasColumnType("int");
-
-                    b.Property<double>("defaultpack")
-                        .HasColumnType("float");
-
-                    b.Property<int>("discount")
-                        .HasColumnType("int");
-
-                    b.Property<double>("secondpack")
-                        .HasColumnType("float");
-
-                    b.Property<double>("thirdpack")
-                        .HasColumnType("float");
-
-                    b.Property<int>("winperc")
-                        .HasColumnType("int");
-
-                    b.HasKey("id");
-
-                    b.HasIndex("PraiceCalculationIDid");
-
-                    b.ToTable("Price_Packages");
-                });
-
-            modelBuilder.Entity("PricingWebApp.Models.Projects", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Projects");
-                });
-
-            modelBuilder.Entity("PricingWebApp.Models.Servises", b =>
-                {
-                    b.Property<int>("id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("id"), 1L, 1);
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("id");
-
-                    b.ToTable("Servises");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -428,36 +275,6 @@ namespace PricingWebApp.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("PricingWebApp.Models.PraiceCalculation", b =>
-                {
-                    b.HasOne("PricingWebApp.Models.Employes", "Employeid")
-                        .WithMany()
-                        .HasForeignKey("EmployeidId");
-
-                    b.HasOne("PricingWebApp.Models.Projects", "Projectid")
-                        .WithMany()
-                        .HasForeignKey("ProjectidId");
-
-                    b.HasOne("PricingWebApp.Models.Servises", "Serviseid")
-                        .WithMany()
-                        .HasForeignKey("Serviseidid");
-
-                    b.Navigation("Employeid");
-
-                    b.Navigation("Projectid");
-
-                    b.Navigation("Serviseid");
-                });
-
-            modelBuilder.Entity("PricingWebApp.Models.Price_Packages", b =>
-                {
-                    b.HasOne("PricingWebApp.Models.PraiceCalculation", "PraiceCalculationID")
-                        .WithMany()
-                        .HasForeignKey("PraiceCalculationIDid");
-
-                    b.Navigation("PraiceCalculationID");
                 });
 #pragma warning restore 612, 618
         }

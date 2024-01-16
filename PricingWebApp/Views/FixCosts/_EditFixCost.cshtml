@@ -11,7 +11,7 @@
             </div>
 
             <form method="post" asp-action="_EditFixCost">
-                <input asp-for="Date" hidden />
+                <input asp-for="LastUpdate" hidden />
                 <input asp-for="Id" hidden />
                 <div class="border p-3 bt-4">
                     <div class="mb-3">
@@ -20,28 +20,16 @@
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
                     <div class="mb-3">
-                        <label asp-for="monthlyCost">monthly Cost</label>
+                        <label asp-for="MonthlyCost">monthly Cost</label>
                         <div class="input-group">
-                            <input asp-for="monthlyCost" class="form-control" autocomplete="off" min="0" required>
+                            <input asp-for="MonthlyCost" class="form-control" autocomplete="off" min="0" required>
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <i class="bi bi-currency-euro font-weight-bold"></i>
                                 </span>
                             </div>
                         </div>
-                        <span asp-validation-for="monthlyCost" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="Cost"></label>
-                        <div class="input-group">
-                            <input asp-for="Cost" class="form-control" autocomplete="off" min="0" required>
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="bi bi-currency-euro font-weight-bold"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <span asp-validation-for="Cost" class="text-danger"></span>
+                        <span asp-validation-for="MonthlyCost" class="text-danger"></span>
                     </div>
                     <br>
                     <button type="submit" class="btn text-white btn-primary" style="width:80px;">Update</button>
