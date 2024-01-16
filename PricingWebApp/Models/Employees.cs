@@ -1,6 +1,6 @@
 namespace PricingWebApp.Models
 {
-    public class Employes
+    public class Employees
     {
         public int Id { get; set; }
         public string? First_Name { get; set; }

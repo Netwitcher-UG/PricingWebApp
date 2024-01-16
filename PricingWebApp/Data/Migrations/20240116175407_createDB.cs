@@ -11,7 +11,7 @@ namespace PricingWebApp.Data.Migrations
         {
 
             migrationBuilder.CreateTable(
-             name: "Employes",
+             name: "Employees",
              columns: table => new
              {
                  Id = table.Column<int>(type: "int", nullable: false)
