@@ -13,7 +13,7 @@ namespace PricingWebApp.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20240116175407_createDB")]
-    partial class createDB
+    partial class CreateDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

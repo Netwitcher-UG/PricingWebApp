@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PricingWebApp.Data.Migrations
 {
-    public partial class createDB : Migration
+    public partial class CreateDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,16 +16,15 @@ namespace PricingWebApp.Data.Migrations
              {
                  Id = table.Column<int>(type: "int", nullable: false)
                      .Annotation("SqlServer:Identity", "1, 1"),
-                 Admin = table.Column<bool>(type: "bit", nullable: false),
+                 FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                 LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                  Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                 First_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                 HourRate = table.Column<double>(type: "float", nullable: false),
-                 Last_Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                 PhoneNo = table.Column<int>(type: "int", nullable: false)
+                 PhoneNo = table.Column<int>(type: "int", nullable: false),
+                 HourRate = table.Column<double>(type: "float", nullable: false)
              },
              constraints: table =>
              {
-                 table.PrimaryKey("PK_Employes", x => x.Id);
+                 table.PrimaryKey("PK_Employses", x => x.Id);
              });
 
             migrationBuilder.CreateTable(
@@ -34,7 +33,6 @@ namespace PricingWebApp.Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Cost = table.Column<double>(type: "float", nullable: false),
                     Date = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Title = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LastUpdate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -72,13 +70,13 @@ namespace PricingWebApp.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "PraiceCalculation",
+                name: "PriceCalculation",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     ProjectId = table.Column<int>(type: "int", nullable: true),
-                    ServiseId = table.Column<int>(type: "int", nullable: true),
+                    ServicesId = table.Column<int>(type: "int", nullable: true),
                     UserId = table.Column<int>(type: "int", nullable: true),
                     FixCost = table.Column<double>(type: "float", nullable: false),
                     ServiseCost = table.Column<double>(type: "float", nullable: false),
@@ -86,66 +84,66 @@ namespace PricingWebApp.Data.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_PraiceCalculation", x => x.Id);
+                    table.PrimaryKey("PK_PriceCalculation", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_PraiceCalculation_Employes_UserId",
+                        name: "FK_PriceCalculation_Employees_UserId",
                         column: x => x.UserId,
-                        principalTable: "Employes",
+                        principalTable: "Employees",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PraiceCalculation_Projects_ProjectId",
+                        name: "FK_PriceCalculation_Projects_ProjectId",
                         column: x => x.ProjectId,
                         principalTable: "Projects",
                         principalColumn: "Id");
                     table.ForeignKey(
-                        name: "FK_PraiceCalculation_Servises_ServiseId",
-                        column: x => x.ServiseId,
-                        principalTable: "Servises",
+                        name: "FK_PriceCalculation_Servises_ServicesId",
+                        column: x => x.ServicesId,
+                        principalTable: "Services",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "Price_Packages",
+                name: "PricePackages",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    PraiceCalculationId = table.Column<int>(type: "int", nullable: true),
+                    PriceCalculationId = table.Column<int>(type: "int", nullable: true),
                     DefaultPack = table.Column<double>(type: "float", nullable: false),
-                    Discount = table.Column<int>(type: "int", nullable: false),
+                    DiscountPercent = table.Column<int>(type: "int", nullable: false),
                     SecondPack = table.Column<double>(type: "float", nullable: false),
                     ThirdPack = table.Column<double>(type: "float", nullable: false),
-                    WinPerc = table.Column<int>(type: "int", nullable: false)
+                    ProfitRatio = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Price_Packages", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Price_Packages_PraiceCalculation_PraiceCalculationId",
-                        column: x => x.PraiceCalculationId,
-                        principalTable: "PraiceCalculation",
+                        name: "FK_Price_Packages_PriceCalculation_PriceCalculationId",
+                        column: x => x.PriceCalculationId,
+                        principalTable: "PriceCalculation",
                         principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_PraiceCalculation_ProjectId",
-                table: "PraiceCalculation",
+                name: "IX_PriceCalculation_ProjectId",
+                table: "PriceCalculation",
                 column: "ProjectId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PraiceCalculation_ServiseId",
-                table: "PraiceCalculation",
-                column: "ServiseId");
+                name: "IX_PriceCalculation_ServicesId",
+                table: "PriceCalculation",
+                column: "ServicesId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_PraiceCalculation_UserId",
-                table: "PraiceCalculation",
+                name: "IX_PriceCalculation_UserId",
+                table: "PriceCalculation",
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Price_Packages_PraiceCalculationId",
-                table: "Price_Packages",
-                column: "PraiceCalculationId");
+                name: "IX_Price_Packages_PriceCalculationId",
+                table: "PricePackages",
+                column: "PriceCalculationId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -154,19 +152,19 @@ namespace PricingWebApp.Data.Migrations
                  name: "FixCosts");
 
             migrationBuilder.DropTable(
-                name: "Price_Packages");
+                name: "PricePackages");
 
             migrationBuilder.DropTable(
-                name: "PraiceCalculation");
+                name: "PriceCalculation");
 
             migrationBuilder.DropTable(
-                name: "Employes");
+                name: "Employees");
 
             migrationBuilder.DropTable(
                 name: "Projects");
 
             migrationBuilder.DropTable(
-                name: "Servises");
+                name: "Services");
         }
     }
 }

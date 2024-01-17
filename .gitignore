@@ -6,17 +6,4 @@
 /PricingWebApp/bin
 /PricingWebApp/obj
 /PricingWebApp/appsettings.json
-/PricingWebApp/bin/
-/PricingWebApp/appsettings.json
-/PricingWebApp/obj/
-/PricingWebApp/obj/PricingWebApp.csproj.nuget.g.props
-/PricingWebApp/obj/project.assets.json
-/PricingWebApp/obj/project.nuget.cache
-/PricingWebApp/bin/
-/PricingWebApp/appsettings.json
-/PricingWebApp/obj/
-/PricingWebApp/obj/PricingWebApp.csproj.nuget.g.props
-/PricingWebApp/obj/project.assets.json
-/PricingWebApp/obj/project.nuget.cache
-/PricingWebApp/obj/Debug/net6.0/project.razor.vscode.bin
 /PricingWebApp/appsettings.Development.json

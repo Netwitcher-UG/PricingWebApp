@@ -10,10 +10,6 @@ namespace PricingWebApp.Models
         public string? Title { get; set; }
         [Required]
         public double MonthlyCost { get; set; }
-        public double Cost { get; set; }
-
-        public DateTime Date { get; set; } = DateTime.Now;
-
         public DateTime LastUpdate { get; set; } = DateTime.Now;
     }
 }

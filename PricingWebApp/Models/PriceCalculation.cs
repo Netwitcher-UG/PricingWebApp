@@ -1,18 +1,14 @@
 namespace PricingWebApp.Models
 {
-    public class PraiceCalculation
+    public class PriceCalculation
     {
         public int Id { get; set; }
 
-        public Employes? User { get; set; }
-        public Servises? Servise { get; set; }
+        public Employees? User { get; set; }
+        public Services? Servise { get; set; }
         public Projects? Project { get; set; }
         public double ServiseCost { get; set; }
-
-        public int count { get; set; }
+        public int Count { get; set; }
         public double FixCost { get; set; }
-
-
-
     }
 }
