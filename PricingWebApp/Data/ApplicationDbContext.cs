@@ -12,13 +12,10 @@ namespace PricingWebApp.Data
         }
         
         public DbSet<FixCosts> FixCosts { get; set; }
-        public DbSet<Servises> Servises { get; set; }
+        public DbSet<Services> Services { get; set; }
         public DbSet<Projects> Projects { get; set; }
         public DbSet<Employees> Employees { get; set; }
         public DbSet<PraiceCalculation> PraiceCalculation { get; set; }
         public DbSet<Price_Packages> Price_Packages { get; set; }
-        
-
-
     }
 }

@@ -1,6 +1,6 @@
 namespace PricingWebApp.Models
 {
-    public class Servises
+    public class Services
     {
         public int Id { get; set; }
 
