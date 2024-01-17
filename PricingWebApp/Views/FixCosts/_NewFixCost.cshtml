@@ -1,21 +1,21 @@
 @model FixCosts
 
-<div class="modal fade" id="addone">
+<div class="modal fade" id="addone" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-white" style="background-color: #462746;">
                 <h5 class="modal-title">Add New Fix Cost</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" onclick="clearAllErrMsg()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
 
-            <form method="post" asp-action="_NewFixCost">
+            <form method="post" asp-action="_NewFixCost" name="NewFixCost">
 
                 <div class="border p-3 bt-4">
                     <div class="mb-3">
                         <label asp-for="Title">Fix Cost Name</label>
-                        <input asp-for="Title" class="form-control" autocomplete="off" value="@ViewBag.FixCostName" required>
+                        <input asp-for="Title" class="form-control" autocomplete="off" value="@ViewBag.FixCostName">
 
                         <span asp-validation-for="Title" class="text-danger"></span>
                     </div>
@@ -23,7 +23,7 @@
                         <label asp-for="MonthlyCost">monthly Cost</label>
                         <div class="input-group">
                             <input asp-for="MonthlyCost" type="number" class="form-control" autocomplete="off"
-                                   value="@ViewBag.monthlyCost" min="0" required>
+                                   value="@ViewBag.monthlyCost" min="0">
                             <div class="input-group-prepend">
                                 <span class="input-group-text">
                                     <i class="bi bi-currency-euro font-weight-bold"></i>
@@ -34,9 +34,11 @@
                         <span asp-validation-for="MonthlyCost" class="text-danger"></span>
                     </div>
                     <br>
-                    <button type="submit" class="btn text-white btn-primary" style="width:80px;">Save</button>
+                    <button type="submit" class="btn text-white btn-primary" style="width:80px;" onclick="return isEmptyFields()">Save</button>
                     <button type="button" class="btn text-white btn-danger" style="width: 80px;"
-                        data-dismiss="modal">Cancel</button>
+                            data-dismiss="modal" onclick="clearAllErrMsg()">
+                        Cancel
+                    </button>
                 </div>
 
             </form>
@@ -44,4 +46,30 @@
         </div>
     </div>
 </div>
+<script>
+    const form = document.querySelector('form[name="NewFixCost"]');
+    const titleInput = form.querySelector('input[name="Title"]');
+    const monthlyCostInput = form.querySelector('input[name="MonthlyCost"]');
+    const titleInputerr = form.querySelector('span[data-valmsg-for="Title"]');
+    const monthlyCostInputerr = form.querySelector('span[data-valmsg-for="MonthlyCost"]');
 
+    function isEmptyFields() {
+        if (titleInput.value == "") {
+            titleInputerr.textContent = "You must put a name for the cost!!";
+            return false;
+        } else {
+            titleInput.nextElementSibling.textContent = "";
+            if (monthlyCostInput.value == null || monthlyCostInput.value == 0) {
+                monthlyCostInputerr.textContent = "You must put a cost!!";
+                return false;
+            } else {
+                monthlyCostInputerr.textContent = "";
+                return true;
+            }
+        };
+    }
+    function clearAllErrMsg() {
+        titleInputerr.textContent = "";
+        monthlyCostInputerr.textContent = "";
+    }
+</script>

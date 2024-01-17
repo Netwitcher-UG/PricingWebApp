@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PricingWebApp.Data;
 using PricingWebApp.Models;
 
@@ -12,12 +13,12 @@ namespace PricingWebApp.Controllers
             _context = context;
         }
         //=============== fix costs table ============
-        public IActionResult FixCostsTable()
+        public async Task<IActionResult> FixCostsTable()
         {
             ViewData["reopenPopupNew"] = null;
             try
             {
-                IEnumerable<FixCosts> fixCosts = _context.FixCosts.ToList();
+                IEnumerable<FixCosts> fixCosts = await _context.FixCosts.ToListAsync();
                 return View(fixCosts);
             }
             catch (Exception ex)
@@ -31,7 +32,7 @@ namespace PricingWebApp.Controllers
         [HttpGet, ActionName("_NewFixCost")]
         public IActionResult NewFixCost()
         {
-            
+
             ViewBag.monthlyCost = 0;
             ViewData["reopenPopupNew"] = null;
             try
@@ -62,7 +63,7 @@ namespace PricingWebApp.Controllers
                     ViewData["reopenPopupNew"] = "reopen";
                     if (fixcost.Title != null) { ViewBag.FixCostName = fixcost.Title; }
                     ViewBag.monthlyCost = fixcost.MonthlyCost;
-                    IEnumerable<FixCosts> fixCosts = _context.FixCosts.ToList();
+                    IEnumerable<FixCosts> fixCosts = await _context.FixCosts.ToListAsync();
                     return View("FixCostsTable", fixCosts);
                 }
             }
@@ -73,15 +74,16 @@ namespace PricingWebApp.Controllers
         }
         //================ edit fix cost  ==============
         [HttpGet, ActionName("_EditFixCost")]
-        public IActionResult EditFixCost(int? id)
+        public async Task<IActionResult> EditFixCost(int? id)
         {
+
             try
             {
-                if (id == null || id == 0)
+                if (id == null || !_context.FixCosts.Any())
                 {
                     return NotFound();
                 }
-                var fixcost = _context.FixCosts.Find(id);
+                var fixcost = await _context.FixCosts.FindAsync(id);
                 if (fixcost == null)
                 {
                     return NotFound();
@@ -107,7 +109,8 @@ namespace PricingWebApp.Controllers
                 }
                 else
                 {
-                    return PartialView(fixcost);
+                    IEnumerable<FixCosts> fixCosts = await _context.FixCosts.ToListAsync();
+                    return View("FixCostsTable", fixCosts);
                 }
             }
             catch (Exception ex)
@@ -118,15 +121,15 @@ namespace PricingWebApp.Controllers
         }
         //============== delete fix cost =============
         [HttpGet, ActionName("_DeleteFixCost")]
-        public IActionResult DeleteFixCost(int? id)
+        public async Task<IActionResult> DeleteFixCost(int? id)
         {
             try
             {
-                if (id == null || id == 0)
+                if (id == null || !_context.FixCosts.Any())
                 {
                     return NotFound();
                 }
-                var fixcost = _context.FixCosts.Find(id);
+                var fixcost = await _context.FixCosts.FindAsync(id);
                 if (fixcost == null)
                 {
                     return NotFound();
@@ -145,7 +148,7 @@ namespace PricingWebApp.Controllers
         {
             try
             {
-                var fixcost = _context.FixCosts.Find(id);
+                var fixcost = await _context.FixCosts.FindAsync(id);
                 if (fixcost == null)
                 {
                     return NotFound();
