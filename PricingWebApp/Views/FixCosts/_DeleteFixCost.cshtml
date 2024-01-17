@@ -15,16 +15,16 @@
                 <div class="border p-3 bt-4">
                     <div class="mb-3">
                         <label asp-for="Title">Fix Cost Name :</label>
-                        <span class="">@Model.Title</span>
+                        <span class="">&nbsp   @Model.Title</span>
 
                     </div>
                     <div class="mb-3">
                         <label asp-for="MonthlyCost">monthly Cost :</label>
-                        <span class=""> @Model.MonthlyCost <i class="bi bi-currency-euro"></i></span>
+                        <span class=""> &nbsp  @Model.MonthlyCost <i class="bi bi-currency-euro"></i></span>
                     </div>
                     <div class="mb-3">
                         <label asp-for="LastUpdate">last Update :</label>
-                        <span class="">@Model.LastUpdate.ToString("dd-MM-yyyy")</span>
+                        <span class=""> &nbsp  @Model.LastUpdate.ToString("dd-MM-yyyy")</span>
                     </div>
                     <br>
                     <button type="submit" class="btn text-white btn-primary" style="width:80px;">Delete</button>

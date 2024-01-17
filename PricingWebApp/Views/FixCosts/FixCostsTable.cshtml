@@ -17,7 +17,7 @@
                         <div class="card-header">
 
                             <div class="w-50">
-                                <a id="mybtn" data-toggle="modal" data-target="#addone"
+                                <a id="mybtn" data-toggle="modal" data-target="#addone" data-url="@Url.Action("_NewFixCost")"
                                class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Fix Cost</a>
                                 @await Html.PartialAsync("_NewFixCost", new FixCosts())
                             </div>
@@ -44,16 +44,16 @@
                                                 <td class="text-center">
                                                     @fixcost.Title
                                                 </td>
-                                                <td  class="text-center">
+                                                <td class="text-center">
                                                     @fixcost.MonthlyCost
                                                 </td>
-                                                <td  class="text-center">
+                                                <td class="text-center">
                                                     @fixcost.LastUpdate.ToString("dd-MM-yyyy")
                                                 </td>
                                                 <td width="10%">
                                                     <a data-url='@Url.Action($"_EditFixCost/{fixcost.Id}")'
                                            id="edit+@fixcost.Id" data-toggle="modal"
-                                           data-target='#EditOne-@fixcost.Id' class="btn btn-success text-center "><i class="bi bi-eye"></i> Edit</a>
+                                           data-target='#EditOne-@fixcost.Id' class="btn btn-success text-center " onclick="KnowMyEditBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
                                                     @await Html.PartialAsync("_EditFixCost", fixcost)
                                                 </td>
 
@@ -110,7 +110,48 @@
     <!-- Control sidebar content goes here -->
 </aside>
 
+<script>
+    var myEditID;
+    var formE;
+    var myfixcostname;
+    var mycost;
+    function KnowMyEditBoxID(x) {
+        myEditID = x.slice(5);
+        formE = document.querySelector('form[name="EditFixCost-' + myEditID + '"]');
+        myfixcostname = formE.querySelector('input[name="Title"]').value;
+        mycost = formE.querySelector('input[name="MonthlyCost"]').value;
 
+    }
+    function isEmptyFieldsEdit() {
+        const titleInputE = formE.querySelector('input[name="Title"]');
+        const monthlyCostInputE = formE.querySelector('input[name="MonthlyCost"]');
+        const titleInputerrE = formE.querySelector('span[data-valmsg-for="Title"]');
+        const monthlyCostInputerrE = formE.querySelector('span[data-valmsg-for="MonthlyCost"]');
+        if (titleInputE.value == "") {
+            titleInputerrE.textContent = "You must put a name for the cost!!";
+            return false;
+        } else {
+            titleInputerrE.textContent = "";
+            if (monthlyCostInputE.value == null || monthlyCostInputE.value == 0) {
+                monthlyCostInputerrE.textContent = "You must put a cost!!";
+                return false;
+            } else {
+                monthlyCostInputerrE.textContent = "";
+                return true;
+            }
+        };
+    }
+    function clearAllErrMsgEdit() {
+        const titleInputE = formE.querySelector('input[name="Title"]');
+        const monthlyCostInputE = formE.querySelector('input[name="MonthlyCost"]');
+        const titleInputerrE = formE.querySelector('span[data-valmsg-for="Title"]');
+        const monthlyCostInputerrE = formE.querySelector('span[data-valmsg-for="MonthlyCost"]');
+        titleInputE.value = myfixcostname;
+        monthlyCostInputE.value = mycost;
+        titleInputerrE.textContent = "";
+        monthlyCostInputerrE.textContent = "";
+    }
+</script>
 
 <!-- reopen popup NewFixCost -->
 @if (ViewData["reopenPopupNew"] != null)
