@@ -8,7 +8,6 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <h1 class="card-title w-100 text-center font-weight-bold font-family:sans-serif;" style="font-size:40px;">Fix Cost Table</h1>
             <div class="col-12">
 
                 @if (Model.Any())
@@ -26,11 +25,11 @@
                         </div>
                         <!-- /.card-header -->
                         <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped " style="font-size:18px;">
+                            <table id="example1" class="table table-bordered table-striped " style="font-size:15px;">
                                 <thead>
                                     <tr>
-                                        <th>Fix Cost Mame</th>
-                                        <th>Cost</th>
+                                        <th>Fix Cost Name</th>
+                                        <th>monthly Cost</th>
                                         <th>Date of Update</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -45,11 +44,11 @@
                                                 <td class="text-center">
                                                     @fixcost.Title
                                                 </td>
-                                                <td width="20%" class="text-center">
-                                                    @fixcost.Cost
+                                                <td  class="text-center">
+                                                    @fixcost.MonthlyCost
                                                 </td>
-                                                <td width="25%" class="text-center">
-                                                    @fixcost.Date.ToShortDateString()
+                                                <td  class="text-center">
+                                                    @fixcost.LastUpdate.ToString("dd-MM-yyyy")
                                                 </td>
                                                 <td width="10%">
                                                     <a data-url='@Url.Action($"_EditFixCost/{fixcost.Id}")'
@@ -76,7 +75,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>Fix Cost Mame</th>
-                                        <th>Cost</th>
+                                        <th>monthly Cost</th>
                                         <th>Date of Update</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
