@@ -4,13 +4,13 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-white" style="background-color: #462746;">
-                <h5 class="modal-title">Add New Fix Cost</h5>
+                <h5 class="modal-title">Add New Fix Cost </h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" onclick="clearAllErrMsg()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
-            <form method="post" asp-action="_NewFixCost" name="NewFixCost">
+            <div class="modal-body" >
+                <form method="post" asp-action="_NewFixCost" name="NewFixCost">
 
                 <div class="border p-3 bt-4">
                     <div class="mb-3">
@@ -34,15 +34,21 @@
                         <span asp-validation-for="MonthlyCost" class="text-danger"></span>
                     </div>
                     <br>
-                    <button type="submit" class="btn text-white btn-primary" style="width:80px;" onclick="return isEmptyFields()">Save</button>
-                    <button type="button" class="btn text-white btn-danger" style="width: 80px;"
-                            data-dismiss="modal" onclick="clearAllErrMsg()">
-                        Cancel
-                    </button>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn text-white btn-danger" style="width: 80px;"
+                                data-dismiss="modal" onclick="clearAllErrMsg()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn text-white btn-primary" style="width:80px;"
+                                onclick="return isEmptyFields()">
+                            Save
+                        </button>
+                    </div>
+                  
                 </div>
 
             </form>
-
+            </div>
         </div>
     </div>
 </div>
@@ -55,6 +61,7 @@
 
     function isEmptyFields() {
         if (titleInput.value == "") {
+            monthlyCostInputerr.textContent = "";
             titleInputerr.textContent = "You must put a name for the cost!!";
             return false;
         } else {

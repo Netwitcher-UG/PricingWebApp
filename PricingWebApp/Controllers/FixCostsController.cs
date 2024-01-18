@@ -15,7 +15,7 @@ namespace PricingWebApp.Controllers
         //=============== fix costs table ============
         public async Task<IActionResult> FixCostsTable()
         {
-            ViewData["reopenPopupNew"] = null;
+            
             try
             {
                 IEnumerable<FixCosts> fixCosts = await _context.FixCosts.ToListAsync();
@@ -29,22 +29,7 @@ namespace PricingWebApp.Controllers
 
 
         //=============== new fix cost =============
-        [HttpGet, ActionName("_NewFixCost")]
-        public IActionResult NewFixCost()
-        {
-
-            ViewBag.monthlyCost = 0;
-            ViewData["reopenPopupNew"] = null;
-            try
-            {
-                FixCosts fcosts = new();
-                return PartialView(fcosts);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Error", new { errorMessage = ex.Message });
-            }
-        }
+       
 
         [HttpPost, ActionName("_NewFixCost")]
         [ValidateAntiForgeryToken]
@@ -54,15 +39,18 @@ namespace PricingWebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    
                     _context.FixCosts.Add(fixcost);
                     await _context.SaveChangesAsync();
+                    TempData["Successaddnewfixcost"] = "Success";
                     return RedirectToAction("FixCostsTable");
                 }
                 else
                 {
-                    ViewData["reopenPopupNew"] = "reopen";
+                   
                     if (fixcost.Title != null) { ViewBag.FixCostName = fixcost.Title; }
                     ViewBag.monthlyCost = fixcost.MonthlyCost;
+                    TempData["Filseaddnewfixcost"] = "err";
                     IEnumerable<FixCosts> fixCosts = await _context.FixCosts.ToListAsync();
                     return View("FixCostsTable", fixCosts);
                 }
@@ -105,10 +93,12 @@ namespace PricingWebApp.Controllers
                 {
                     _context.FixCosts.Update(fixcost);
                     await _context.SaveChangesAsync();
+                    TempData["Successeditfixcost"] = "Success";
                     return RedirectToAction("FixCostsTable");
                 }
                 else
                 {
+                    TempData["Filseditfixcost"] = "err";
                     IEnumerable<FixCosts> fixCosts = await _context.FixCosts.ToListAsync();
                     return View("FixCostsTable", fixCosts);
                 }

@@ -17,7 +17,8 @@
                         <div class="card-header">
 
                             <div class="w-50">
-                                <a id="mybtn" data-toggle="modal" data-target="#addone" data-url="@Url.Action("_NewFixCost")"
+                               
+                                <a id="mybtn" data-toggle="modal" data-target="#addone" 
                                class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Fix Cost</a>
                                 @await Html.PartialAsync("_NewFixCost", new FixCosts())
                             </div>
@@ -29,7 +30,7 @@
                                 <thead>
                                     <tr>
                                         <th>Fix Cost Name</th>
-                                        <th>monthly Cost</th>
+                                        <th>Monthly Cost</th>
                                         <th>Date of Update</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -45,7 +46,7 @@
                                                     @fixcost.Title
                                                 </td>
                                                 <td>
-                                                    @fixcost.MonthlyCost
+                                                    @fixcost.MonthlyCost  <i class="bi bi-currency-euro"></i>
                                                 </td>
                                                 <td>
                                                     @fixcost.LastUpdate.ToString("dd-MM-yyyy")
@@ -75,7 +76,7 @@
                                 <tfoot>
                                     <tr>
                                         <th>Fix Cost Mame</th>
-                                        <th>monthly Cost</th>
+                                        <th>Monthly Cost</th>
                                         <th>Date of Update</th>
                                         <th>Edit</th>
                                         <th>Delete</th>
@@ -91,7 +92,7 @@
                 {
                     <div class=" ">
                         <a id="mybtn" data-toggle="modal" data-target="#addone"
-                       class="" style="text-decoration: none;cursor: pointer; "><i class="bi bi-plus"></i> Add New Fix Cost</a>
+                       class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Fix Cost</a>
                         @await Html.PartialAsync("_NewFixCost", new FixCosts())
                         <p class="font-weight-bold text-center mt-5">No fix costs . Let's add a fix cost ...</p>
                     </div>
@@ -128,6 +129,7 @@
         const titleInputerrE = formE.querySelector('span[data-valmsg-for="Title"]');
         const monthlyCostInputerrE = formE.querySelector('span[data-valmsg-for="MonthlyCost"]');
         if (titleInputE.value == "") {
+            monthlyCostInputerrE.textContent = "";
             titleInputerrE.textContent = "You must put a name for the cost!!";
             return false;
         } else {
@@ -152,14 +154,24 @@
         monthlyCostInputerrE.textContent = "";
     }
 </script>
+<script>
+    function checksaved(x,n){
+        setTimeout(function () {
+            if (n == true) { toastr.success(x); }
+            else { toastr.error(x) }
+        }, 1000);
+    }
+</script>
 
-<!-- reopen popup NewFixCost -->
-@if (ViewData["reopenPopupNew"] != null)
-{
-    <script type="text/javascript">
-        const link = document.getElementById("mybtn");
-        setTimeout(() => {
-            link.click();
-        }, 500);
-    </script>
+@if (TempData["Successaddnewfixcost"] != null ){
+    <script>checksaved('Added successfully',true);</script>
+}
+@if(TempData["Filseaddnewfixcost"] != null){
+    <script>checksaved('Add failed',false) </script>
+}
+@if (TempData["Successeditfixcost"] != null){
+    <script>checksaved('Update successfully', true);</script>
+}
+@if (TempData["Filseditfixcost"] != null){
+    <script>checksaved('Update failed', false)</script>
 }

@@ -9,7 +9,7 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-
+            <div class="modal-body">
             <form method="post" asp-action="_DeleteFixCost">
                 <input asp-for="Id" hidden />
                 <div class="border p-3 bt-4">
@@ -27,13 +27,17 @@
                         <span class=""> &nbsp  @Model.LastUpdate.ToString("dd-MM-yyyy")</span>
                     </div>
                     <br>
-                    <button type="submit" class="btn text-white btn-primary" style="width:80px;">Delete</button>
-                    <button type="button" class="btn text-white btn-danger" style="width: 80px;"
-                            data-dismiss="modal">
-                        Cancel
-                    </button>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn text-white btn-danger" style="width: 80px;"
+                                data-dismiss="modal">
+                                Cancel
+                        </button>
+                        <button type="submit" class="btn text-white btn-primary" style="width:80px;">Delete</button>
+                    
+                    </div>
                 </div>
             </form>
+            </div>
         </div>
     </div>
 </div>
