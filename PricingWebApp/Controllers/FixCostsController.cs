@@ -61,28 +61,7 @@ namespace PricingWebApp.Controllers
             }
         }
         //================ edit fix cost  ==============
-        [HttpGet, ActionName("_EditFixCost")]
-        public async Task<IActionResult> EditFixCost(int? id)
-        {
-
-            try
-            {
-                if (id == null || !_context.FixCosts.Any())
-                {
-                    return NotFound();
-                }
-                var fixcost = await _context.FixCosts.FindAsync(id);
-                if (fixcost == null)
-                {
-                    return NotFound();
-                }
-                return PartialView(fixcost);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Error", new { errorMessage = ex.Message });
-            }
-        }
+     
         [HttpPost, ActionName("_EditFixCost")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditFixCost(FixCosts fixcost)
@@ -110,27 +89,7 @@ namespace PricingWebApp.Controllers
 
         }
         //============== delete fix cost =============
-        [HttpGet, ActionName("_DeleteFixCost")]
-        public async Task<IActionResult> DeleteFixCost(int? id)
-        {
-            try
-            {
-                if (id == null || !_context.FixCosts.Any())
-                {
-                    return NotFound();
-                }
-                var fixcost = await _context.FixCosts.FindAsync(id);
-                if (fixcost == null)
-                {
-                    return NotFound();
-                }
-                return PartialView(fixcost);
-            }
-            catch (Exception ex)
-            {
-                return RedirectToAction("Error", new { errorMessage = ex.Message });
-            }
-        }
+    
 
         [HttpPost, ActionName("_DeleteFixCost")]
         [ValidateAntiForgeryToken]
