@@ -19,7 +19,7 @@ namespace PricingWebApp.Data.Migrations
                  FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                  LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                  Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                 PhoneNo = table.Column<int>(type: "int", nullable: false),
+                 PhoneNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                  HourRate = table.Column<double>(type: "float", nullable: false)
              },
              constraints: table =>
