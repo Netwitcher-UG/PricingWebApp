@@ -1,4 +1,40 @@
-﻿@model PricingWebApp.Models.Employees
+﻿@model Employees
+
+<div class="modal fade" id="DeleteOne-@Model.Id" aria-labelledby="DeleteOne-@Model.Id" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #462746;">
+                <h5 class="modal-title">Delete Employee</h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="post" asp-action="DeleteEmployee">
+                <input asp-for="Id" hidden />
+                <div class="border p-3 bt-4">
+                    <div class="mb-3">
+                        <label asp-for="FirstName">FirstName :</label>
+                        <span class="">@Model.FirstName</span>
+
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="LastName">Last Name :</label>
+                        <span class="">@Model.LastName</span>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn text-white btn-primary" style="width:80px;">Delete</button>
+                    <button type="button" class="btn text-white btn-danger" style="width: 80px;"
+                            data-dismiss="modal">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@* @model PricingWebApp.Models.Employees
 
 @{
     ViewData["Title"] = "Delete";
@@ -49,3 +85,4 @@
         <a asp-action="EmployeesTable">Back to List</a>
     </form>
 </div>
+ *@

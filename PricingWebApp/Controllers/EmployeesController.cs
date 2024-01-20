@@ -87,7 +87,7 @@ namespace PricingWebApp.Controllers
         // POST: Employees/Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditEmployee(int id, [Bind("Id,FirstName,MiddleName,LastName,EmailAdress,PhoneNo,Adress")] Employees employees)
+        public async Task<IActionResult> EditEmployee(int id, [Bind("Id,FirstName,LastName,PhoneNo,Email,HourRate")] Employees employees)
         {
             if (id != employees.Id)
             {
@@ -136,7 +136,7 @@ namespace PricingWebApp.Controllers
         }
 
         // POST: Employees/Delete
-        [HttpPost, ActionName("Delete")]
+        [HttpPost, ActionName("DeleteEmployee")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
