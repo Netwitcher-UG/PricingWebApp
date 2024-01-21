@@ -25,8 +25,8 @@
 
                         </div>
                         <!-- /.card-header -->
-                        <div class="card-body">
-                            <table id="example1" class="table table-bordered table-striped " >
+                        <div class="card-body" id="fixCostsTable">
+                            <table id="example1" class="table table-bordered table-striped responsive-table">
                                 <thead>
                                     <tr>
                                         <th>Fix Cost Name</th>
@@ -36,7 +36,7 @@
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="myFixCostsTbody">
                                     @foreach (var fixcost in Model)
                                     {
                                         try
@@ -45,20 +45,21 @@
                                                 <td>
                                                     @fixcost.Title
                                                 </td>
-                                                <td>
-                                                    @fixcost.MonthlyCost  <i class="bi bi-currency-euro"></i>
+                                                <td class="myMonthlyCostTds">
+                                                    
+                                                    @fixcost.MonthlyCost  
                                                 </td>
                                                 <td>
                                                     @fixcost.LastUpdate.ToString("dd-MM-yyyy")
                                                 </td>
-                                                <td width="10%">
+                                                <td >
                                                     <a data-url='@Url.Action($"_EditFixCost/{fixcost.Id}")'
                                            id="edit+@fixcost.Id" data-toggle="modal"
                                            data-target='#EditOne-@fixcost.Id' class="btn btn-success text-center " onclick="KnowMyEditBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
                                                     @await Html.PartialAsync("_EditFixCost", fixcost)
                                                 </td>
 
-                                                <td width="10%">
+                                                <td >
                                                     <a data-url='@Url.Action($"_DeleteFixCost/{fixcost.Id}")'
                                            id="delete+@fixcost.Id" data-toggle="modal"
                                            data-target='#DeleteOne-@fixcost.Id' class="btn btn-danger text-left"><i class="bi bi-trash"></i> Delete</a>
@@ -122,6 +123,9 @@
         myfixcostname = formE.querySelector('input[name="Title"]').value;
         mycost = formE.querySelector('input[name="MonthlyCost"]').value;
 
+        
+
+
     }
     function isEmptyFieldsEdit() {
         const titleInputE = formE.querySelector('input[name="Title"]');
@@ -175,3 +179,95 @@
 @if (TempData["Filseditfixcost"] != null){
     <script>checksaved('Update failed', false)</script>
 }
+
+
+
+<script>
+        
+     const myTableBtnShowMore = document.querySelector('#myFixCostsTbody tr > td:first-child');
+     const myTbody = document.querySelector('#myFixCostsTbody');
+
+     function changeMyMonthlyCost(){
+        const myMonthlyCost = myTbody.querySelectorAll(".myMonthlyCostTds");
+       myMonthlyCost.forEach(function(elm) {
+           const x = new Intl.NumberFormat('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+            }).formatToParts(elm.textContent).map(
+                p => p.type != 'literal' && p.type != 'currency' ? p.value : ''
+            ).join('')
+            elm.textContent = x + " €";
+        });
+     }
+        
+     function countCulomn(){
+         let visibleColumnsCount = 0;
+         const firstRow = myTbody.querySelectorAll('tr');
+         const tdsInFirstTr = firstRow[0].querySelectorAll('td');
+         tdsInFirstTr.forEach(function(element){
+                 if (element.style.display === 'none') {  visibleColumnsCount++;  }
+           });        
+         return visibleColumnsCount;
+     }    
+           
+     window.addEventListener('load',changMyModalID );
+     window.addEventListener('load',changeMyMonthlyCost );
+     window.addEventListener('resize',changMyModalID );
+
+    function changMyModalID() {
+
+    const elements = myTbody.querySelectorAll('*');
+
+    const myTrShowMore = myTbody.querySelectorAll("tr.dt-hasChild");
+    const firstChildElements = [];
+    for (const trElement of myTrShowMore) {
+        firstChildElements.push(trElement.querySelector("td"));
+    }
+    if(firstChildElements.length == 1){
+        firstChildElements[0].click();
+    }else if(firstChildElements.length > 1){
+        location.reload();
+    }
+
+    setTimeout(function () {
+        elements.forEach(function (element) {
+            if (countCulomn() == 1 && element.id) {
+
+                if (element.id.includes("notDelete")) {
+
+                } else if (element.id.slice(0, 6) === 'Delete') {
+                    const index = element.id.indexOf("not");
+                    if (index !== -1) { return; }
+                    element.id = "not" + element.id;
+                }
+                if (element.id.includes("notEdit")) {
+                    element.id = element.id.slice(3, element.id.length);
+                }
+            } else if (countCulomn() >= 2 && element.id) {
+                if (element.id.includes("notDelete") && element.id.includes("notEdit")) {
+                } else {
+                    if (element.id.includes("notDelete")) {
+                    } else if (element.id.slice(0, 6) === 'Delete') {
+                        const index = element.id.indexOf("not");
+                        if (index !== -1) { return; }
+                        element.id = "not" + element.id;
+                    }
+                    if (element.id.includes("notEdit")) {
+                    } else if (element.id.slice(0, 4) === 'Edit') {
+                        const index = element.id.indexOf("not");
+                        if (index !== -1) { return; }
+                        element.id = "not" + element.id;
+                    }
+                }
+            } else if (countCulomn() == 0 && element.id && element.id.includes("not")) {
+                if (element.id.includes("notDelete")) {
+                    element.id = element.id.slice(3, element.id.length);
+                }
+                if (element.id.includes("notEdit")) {
+                    element.id = element.id.slice(3, element.id.length);
+                }
+            }
+        });
+    }, 400);
+}
+</script>
