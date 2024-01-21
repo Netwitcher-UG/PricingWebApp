@@ -1,0 +1,61 @@
+@model Employees
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        .input-validation-error {
+            border: 1px solid darkred;
+            background-color: #ffcccb;
+        }
+
+        .validation-summary-errors {
+            color: red;
+            font-weight: 200;
+        }
+    </style>
+</head>
+
+<body>
+    <form asp-action="NewEmployee" method="post">
+        <h1>Create Employee</h1>
+
+        <div asp-validation-summary="All"></div>
+
+        <div class="form-groub p-1">
+            <label asp-for="FirstName">First Name</label>
+            <input asp-for="FirstName" class="form-control form-control-sm" />
+        </div>
+
+        <div class="form-groub p-1">
+            <label asp-for="LastName">Last Name</label>
+            <input asp-for="LastName" class="form-control form-control-sm" />
+        </div>
+
+        <div class="form-groub p-1">
+            <label asp-for="Email">Email Adress</label>
+            <input type="email" asp-for="Email" class="form-control form-control-sm" />
+        </div>
+
+        <div class="form-groub p-1">
+            <label asp-for="PhoneNo">Phone Number</label>
+            <input type="number" asp-for="PhoneNo" class="form-control form-control-sm" />
+        </div>
+
+        <div class="form-groub p-1">
+            <label asp-for="HourRate">Hour Rate</label>
+            <input type="number" asp-for="HourRate" class="form-control form-control-sm" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Create</button>
+
+    </form>
+
+    <div>
+        <a asp-action="EmployeesTable">Back to List</a>
+    </div>
+
+
+</body>
+</html>
