@@ -122,11 +122,8 @@
         formE = document.querySelector('form[name="EditFixCost-' + myEditID + '"]');
         myfixcostname = formE.querySelector('input[name="Title"]').value;
         mycost = formE.querySelector('input[name="MonthlyCost"]').value;
-
-        
-
-
     }
+
     function isEmptyFieldsEdit() {
         const titleInputE = formE.querySelector('input[name="Title"]');
         const monthlyCostInputE = formE.querySelector('input[name="MonthlyCost"]');
@@ -159,10 +156,10 @@
     }
 </script>
 <script>
-    function checksaved(x,n){
+    function checksaved(title,n){
         setTimeout(function () {
-            if (n == true) { toastr.success(x); }
-            else { toastr.error(x) }
+            if (n == true) { toastr.success(title); }
+            else { toastr.error(title) }
         }, 1000);
     }
 </script>
@@ -178,6 +175,14 @@
 }
 @if (TempData["Filseditfixcost"] != null){
     <script>checksaved('Update failed', false)</script>
+}
+@if (TempData["Successdeletefixcost"] != null)
+{
+    <script>checksaved('Delete successfully', true)</script>
+}
+@if (TempData["Filsdeletefixcost"] != null)
+{
+    <script>checksaved('Delete failed relode please', false)</script>
 }
 
 
@@ -208,11 +213,10 @@
                  if (element.style.display === 'none') {  visibleColumnsCount++;  }
            });        
          return visibleColumnsCount;
-     }    
-           
-     window.addEventListener('load',changMyModalID );
-     window.addEventListener('load',changeMyMonthlyCost );
-     window.addEventListener('resize',changMyModalID );
+     }
+    window.addEventListener('load', changeMyMonthlyCost);
+    window.addEventListener('load',changMyModalID );
+    window.addEventListener('resize',changMyModalID );
 
     function changMyModalID() {
 

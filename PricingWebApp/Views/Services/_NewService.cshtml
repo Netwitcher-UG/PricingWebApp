@@ -1,0 +1,37 @@
+﻿@model Services
+
+<div class="modal fade" id="addService" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #462746;">
+                <h5 class="modal-title">Add New Service </h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" onclick="clearAllErrMsgService()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form method="post" asp-action="_NewService" name="NewService">
+                    <div class="border p-3 bt-4">
+                        <div class="mb-3">
+                            <label asp-for="Title">Service Name</label>
+                            <input asp-for="Title" class="form-control" autocomplete="off" value="@ViewBag.ServiceName">
+                            <span asp-validation-for="Title" class="text-danger"></span>
+                        </div>
+                        <br>
+                        <div class="modal-footer justify-content-between">
+                            <button type="button" class="btn text-white btn-danger" style="width: 80px;"
+                                    data-dismiss="modal" onclick="clearAllErrMsgService()">
+                                Cancel
+                            </button>
+                            <button type="submit" class="btn text-white btn-primary" style="width:80px;"
+                                    onclick="return isServiceFieldEmpty()">
+                                Save
+                            </button>
+                        </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

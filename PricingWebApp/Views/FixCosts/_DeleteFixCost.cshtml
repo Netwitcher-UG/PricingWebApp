@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body">
             <form method="post" asp-action="_DeleteFixCost">
-                <input asp-for="Id" hidden />
+              <input asp-for="Id" hidden id="" placeholder="x" />
                 <div class="border p-3 bt-4">
                     <div class="mb-3">
                         <label asp-for="Title">Fix Cost Name :</label>
@@ -27,6 +27,7 @@
                         <span class=""> &nbsp  @Model.LastUpdate.ToString("dd-MM-yyyy")</span>
                     </div>
                     <br>
+                    </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn text-white btn-danger" style="width: 80px;"
                                 data-dismiss="modal">
@@ -35,7 +36,7 @@
                         <button type="submit" class="btn text-white btn-primary" style="width:80px;">Delete</button>
                     
                     </div>
-                </div>
+                
             </form>
             </div>
         </div>

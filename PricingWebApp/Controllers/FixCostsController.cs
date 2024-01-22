@@ -100,10 +100,13 @@ namespace PricingWebApp.Controllers
                 var fixcost = await _context.FixCosts.FindAsync(id);
                 if (fixcost == null)
                 {
-                    return NotFound();
+                    TempData["Filsdeletefixcost"] = "err";
+                    IEnumerable<FixCosts> fixCosts = await _context.FixCosts.ToListAsync();
+                    return View("FixCostsTable", fixCosts);
                 }
                 _context.Remove(fixcost);
                 await _context.SaveChangesAsync();
+                TempData["Successdeletefixcost"] = "Success";
                 return RedirectToAction("FixCostsTable");
             }
             catch (Exception ex)
