@@ -1,0 +1,254 @@
+﻿@model IEnumerable<Services>
+@{
+    ViewData["Title"] = "Services Table";
+}
+
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-12">
+
+                @if (Model.Any())
+                {
+                    <div class="card">
+
+                        <div class="card-header">
+
+                            <div class="w-50">
+
+                                <a id="myBtnNewService" data-toggle="modal" data-target="#addService"
+                               class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Service</a>
+                                @await Html.PartialAsync("_NewService", new Services())
+                            </div>
+
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body" id="myServicesTable">
+                            <table id="example1" class="table table-bordered table-striped responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th>Service Name</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="myServicesTbody">
+                                    @foreach (var service in Model)
+                                    {
+                                        try
+                                        {
+                                            <tr>
+                                                <td>
+                                                    @service.Title
+                                                </td>
+                                                <td>
+                                                    <a data-url='@Url.Action($"_EditService/{service.Id}")'
+                                           id="editservice+@service.Id" data-toggle="modal"
+                                           data-target='#EditService-@service.Id' class="btn btn-success text-center " onclick="KnowMyEditServiceBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
+                                                    @await Html.PartialAsync("_EditService", service)
+                                                </td>
+
+                                                <td>
+                                                    <a data-url='@Url.Action($"_DeleteService/{service.Id}")'
+                                                       id="deleteservice+@service.Id" data-toggle="modal"
+                                                       data-target='#DeleteService-@service.Id' class="btn btn-danger text-left"><i class="bi bi-trash"></i> Delete</a>
+                                                    @await Html.PartialAsync("_DeleteService", service)
+                                                </td>
+
+                                            </tr>
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            <partial>@ex.Message</partial>
+                                        }
+                                    }
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <th>Service Name</th>
+                                        <th>Edit</th>
+                                        <th>Delete</th>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+
+                }
+                else
+                {
+                    <div class=" ">
+                        <a id="myBtnNewService" data-toggle="modal" data-target="#addService"
+                           class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Service</a>
+                        @await Html.PartialAsync("_NewService", new Services())
+                        <p class="font-weight-bold text-center mt-5">No service . Let's add a service ...</p>
+                    </div>
+                }
+                <!-- /.card -->
+            </div>
+            <!-- /.col -->
+        </div>
+        <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+</section>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+
+<script>
+    
+    const formNewService = document.querySelector('form[name="NewService"]');
+    const ServiceTitleInput = formNewService.querySelector('input[name="Title"]');
+    const ServiceTitleInputerr = formNewService.querySelector('span[data-valmsg-for="Title"]');
+
+    function isServiceFieldEmpty() {
+        if (ServiceTitleInput.value == "") {
+            ServiceTitleInputerr.textContent = "You must put a name for the service!!";
+            return false;
+        } else {
+            ServiceTitleInputerr.textContent = "";
+                return true;
+        };
+    }
+    function clearAllErrMsgService() {
+        ServiceTitleInputerr.textContent = "";
+    }
+
+    let myEditServiceID;
+    let formServiceE;
+    let myServiseName;
+    function KnowMyEditServiceBoxID(x) {
+        myEditServiceID = x.slice(12);
+        formServiceE = document.querySelector('form[name="EditService-' + myEditServiceID + '"]');
+        myServiseName = formServiceE.querySelector('input[name="Title"]').value;
+    }
+
+    function isEmptyFieldsEditService() {
+        const titleInputE = formServiceE.querySelector('input[name="Title"]');
+        const titleInputerrE = formServiceE.querySelector('span[data-valmsg-for="Title"]');
+        if (titleInputE.value == "") {
+            titleInputerrE.textContent = "You must put a name for the service!!";
+            return false;
+        } else {
+            titleInputerrE.textContent = "";
+            return true;
+        };
+    }
+    function clearAllErrMsgEditService() {
+        const titleInputE = formServiceE.querySelector('input[name="Title"]');
+        const titleInputerrE = formServiceE.querySelector('span[data-valmsg-for="Title"]');
+        titleInputE.value = myServiseName;
+        titleInputerrE.textContent = "";       
+    }
+
+    function checksaved2(title, doneOrNot) {
+        setTimeout(function () {
+            if (doneOrNot == true) { toastr.success(title); }
+            else { toastr.error(title) }
+        }, 1000);
+    }
+</script>
+
+@if (TempData["Successaddnewservice"] != null)
+{
+    <script>checksaved2('Added successfully', true);</script>
+}
+@if (TempData["Filseaddnewservice"] != null)
+{
+    <script>checksaved2('Add failed', false)</script>
+}
+@if (TempData["Successeditservice"] != null)
+{
+    <script>checksaved2('Update successfully', true);</script>
+}
+@if (TempData["Filseeditservice"] != null)
+{
+    <script>checksaved2('Update failed', false)</script>
+}
+@if (TempData["Successdeleteservice"] != null)
+{
+    <script>checksaved2('Delete successfully', true);</script>
+}
+@if (TempData["Filsedeleteservice"] != null)
+{
+    <script>checksaved2('Delete failed relode please', false)</script>
+}
+
+
+<script>
+    const myServiseTbody = document.querySelector('#myServicesTbody');
+
+    function countCulomnService() {
+        let visibleColumnsCount = 0;
+        const firstRow = myServiseTbody.querySelectorAll('tr');
+        const tdsInFirstTr = firstRow[0].querySelectorAll('td');
+        tdsInFirstTr.forEach(function (element) {
+            if (element.style.display === 'none') { visibleColumnsCount++; }
+        });
+        return visibleColumnsCount;
+    }
+
+    window.addEventListener('load', changMyServiceModalID);
+    window.addEventListener('resize', changMyServiceModalID);
+
+    function changMyServiceModalID() {
+
+        const elements = myServiseTbody.querySelectorAll('*');
+        const myTrShowMore = myServiseTbody.querySelectorAll("tr.dt-hasChild");
+        const firstChildElements = [];
+
+        for (const trElement of myTrShowMore) {
+            firstChildElements.push(trElement.querySelector("td"));
+        }
+        if (firstChildElements.length == 1) {
+            firstChildElements[0].click();
+        } else if (firstChildElements.length > 1) {
+            location.reload();
+        }
+
+        setTimeout(function () {
+            elements.forEach(function (element) {
+                if (countCulomnService() == 1 && element.id) {
+
+                    if (element.id.includes("notDelete")) {
+
+                    } else if (element.id.slice(0, 6) === 'Delete') {
+                        const index = element.id.indexOf("not");
+                        if (index !== -1) { return; }
+                        element.id = "not" + element.id;
+                    }
+                    if (element.id.includes("notEdit")) {
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                } else if (countCulomnService() >= 2 && element.id) {
+                    if (element.id.includes("notDelete") && element.id.includes("notEdit")) {
+                    } else {
+                        if (element.id.includes("notDelete")) {
+                        } else if (element.id.slice(0, 6) === 'Delete') {
+                            const index = element.id.indexOf("not");
+                            if (index !== -1) { return; }
+                            element.id = "not" + element.id;
+                        }
+                        if (element.id.includes("notEdit")) {
+                        } else if (element.id.slice(0, 4) === 'Edit') {
+                            const index = element.id.indexOf("not");
+                            if (index !== -1) { return; }
+                            element.id = "not" + element.id;
+                        }
+                    }
+                } else if (countCulomnService() == 0 && element.id && element.id.includes("not")) {
+                    if (element.id.includes("notDelete")) {
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                    if (element.id.includes("notEdit")) {
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                }
+            });
+        }, 400);
+    }
+</script>

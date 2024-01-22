@@ -11,8 +11,7 @@
             </div>
             <div class="modal-body">
             <form method="post" asp-action="_EditFixCost" name="EditFixCost-@Model.Id">
-                <input asp-for="LastUpdate" hidden />
-                <input asp-for="Id" hidden />
+              <input asp-for="Id" hidden id="" placeholder="x" />
                 <div class="border p-3 bt-4">
                     <div class="mb-3">
                         <label asp-for="Title">Fix Cost Name</label>
@@ -38,9 +37,8 @@
                                 Cancel
                             </button>
                     <button type="submit" class="btn text-white btn-primary" style="width:80px;" onclick="return isEmptyFieldsEdit()">Update</button>
-                    
                 </div>
-                    </div>
+              </div>
             </form>
             </div>
         </div>
