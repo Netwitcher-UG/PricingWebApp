@@ -14,7 +14,7 @@ namespace PricingWebApp.Controllers
             _context = context;
         }
         //=============== fix costs table ============
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> FixCostsTable()
         {
             
