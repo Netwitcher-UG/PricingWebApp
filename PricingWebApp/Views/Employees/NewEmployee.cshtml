@@ -1,61 +1,116 @@
 @model Employees
 
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-    <style>
-        .input-validation-error {
-            border: 1px solid darkred;
-            background-color: #ffcccb;
-        }
+<div class="modal fade" id="addone" data-backdrop="static" data-keyboard="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-white" style="background-color: #462746;">
+                <h5 class="modal-title">Add New Employee </h5>
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" onclick="clearAllErrMsg()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" >
+                <form method="post" asp-action="NewEmployee" name="NewEmployee">
 
-        .validation-summary-errors {
-            color: red;
-            font-weight: 200;
-        }
-    </style>
-</head>
+                <div class="border p-3 bt-4">
+                    <div class="mb-3">
+                        <label asp-for="FirstName">First Name</label>
+                        <input asp-for="FirstName" class="form-control" autocomplete="off" value="@ViewBag.FixCostName">
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                       <div class="mb-3">
+                        <label asp-for="LastName">Last Name</label>
+                        <input asp-for="LastName" class="form-control" autocomplete="off" value="@ViewBag.FixCostName">
+                        <span asp-validation-for="LastName" class="text-danger"></span>
+                    </div>
+                       <div class="mb-3">
+                        <label asp-for="Email">Email</label>
+                        <input type="email" asp-for="Email" class="form-control" autocomplete="off" value="@ViewBag.FixCostName">
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                       <div class="mb-3">
+                        <label asp-for="PhoneNo">PhoneNo</label>
+                        <input type="number" asp-for="PhoneNo" class="form-control" autocomplete="off" value="@ViewBag.FixCostName">
+                        <span asp-validation-for="PhoneNo" class="text-danger"></span>
+                    <div class="mb-3">
+                        <label asp-for="HourRate">Hour Rate</label>
+                        <div class="input-group">
+                            <input asp-for="HourRate" type="number" class="form-control" autocomplete="off"
+                                   value="@ViewBag.HourRate" min="0">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="bi bi-currency-euro font-weight-bold"></i>
+                                </span>
+                            </div>
 
-<body>
-    <form asp-action="NewEmployee" method="post">
-        <h1>Create Employee</h1>
+                        </div>
+                        <span asp-validation-for="HourRate" class="text-danger"></span>
+                    </div>
+                    <br>
+                    <div class="modal-footer justify-content-between">
+                        <button type="button" class="btn text-white btn-danger" style="width: 80px;"
+                                data-dismiss="modal" onclick="clearAllErrMsg()">
+                            Cancel
+                        </button>
+                        <button type="submit" class="btn text-white btn-primary" style="width:80px;"
+                                onclick="return isEmptyFields()">
+                            Save
+                        </button>
+                    </div>
+                  
+                </div>
 
-        <div asp-validation-summary="All"></div>
-
-        <div class="form-groub p-1">
-            <label asp-for="FirstName">First Name</label>
-            <input asp-for="FirstName" class="form-control form-control-sm" />
+            </form>
+            </div>
         </div>
-
-        <div class="form-groub p-1">
-            <label asp-for="LastName">Last Name</label>
-            <input asp-for="LastName" class="form-control form-control-sm" />
-        </div>
-
-        <div class="form-groub p-1">
-            <label asp-for="Email">Email Adress</label>
-            <input type="email" asp-for="Email" class="form-control form-control-sm" />
-        </div>
-
-        <div class="form-groub p-1">
-            <label asp-for="PhoneNo">Phone Number</label>
-            <input type="number" asp-for="PhoneNo" class="form-control form-control-sm" />
-        </div>
-
-        <div class="form-groub p-1">
-            <label asp-for="HourRate">Hour Rate</label>
-            <input type="number" asp-for="HourRate" class="form-control form-control-sm" />
-        </div>
-
-        <button type="submit" class="btn btn-primary">Create</button>
-
-    </form>
-
-    <div>
-        <a asp-action="EmployeesTable">Back to List</a>
     </div>
+</div>
+<script>
+    const form = document.querySelector('form[name="NewEmployee"]');
+    const firstNameInput = form.querySelector('input[name="FirstName"]');
+    const lastNameInput = form.querySelector('input[name="LastName"]');
+    const emailInput = form.querySelector('input[name="Email"]');
+    const phoneNoInput = form.querySelector('input[name="PhoneNo"]');
+    const hourRateInput = form.querySelector('input[name="HourRate"]');
+    const firstNameInputerr = form.querySelector('span[data-valmsg-for="FirstName"]');
+    const lastNameInputerr = form.querySelector('span[data-valmsg-for="LastName"]');
+    const emailInputerr = form.querySelector('span[data-valmsg-for="Email"]');
+    const phoneNoInputerr = form.querySelector('span[data-valmsg-for="PhoneNo"]');
+    const hourRateInputerr = form.querySelector('span[data-valmsg-for="HourRate"]');
 
-
-</body>
-</html>
+    function isEmptyFields() {
+        if (firstNameInput.value == "") {
+            clearAllErrMsg();
+            firstNameInputerr.textContent = "You must put a first name for the employee!!";
+            return false;
+        } else if (lastNameInput.value == "")  { 
+            clearAllErrMsg();
+            lastNameInputerr.textContent = "You must put a last name for the employee!!";
+            return false;
+        } else if (emailInput.value == "")  { 
+            clearAllErrMsg();
+            emailInputerr.textContent = "You must put an email for the employee!!";
+            return false;
+        } else if (phoneNoInput.value == "")  { 
+            clearAllErrMsg();
+            phoneNoInputerr.textContent = "You must put a phone number for the employee!!";
+            return false;
+        } else if (hourRateInput.value == null || hourRateInput.value == 0) {
+            clearAllErrMsg();
+            hourRateInputerr.textContent = "You must put an hour rate for the employee!!";
+            return false;
+        }
+        else {
+            clearAllErrMsg();
+            return true;
+        }
+    }
+           
+    function clearAllErrMsg() {
+        firstNameInputerr.textContent = "";
+        lastNameInputerr.textContent = "";
+        emailInputerr.textContent = "";
+        phoneNoInputerr.textContent = "";
+        hourRateInputerr.textContent = "";
+    }
+</script>
