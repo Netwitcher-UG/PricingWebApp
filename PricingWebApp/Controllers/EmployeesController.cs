@@ -85,9 +85,9 @@ namespace PricingWebApp.Controllers
         }
 
         // POST: Employees/Edit
-        [HttpPost]
+        [HttpPost, ActionName("EditEmployee")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EditEmployee(int id, [Bind("Id,FirstName,LastName,PhoneNo,Email,HourRate")] Employees employees)
+        public async Task<IActionResult> EditFixCost(int? id, Employees employees)
         {
             if (id != employees.Id)
             {
