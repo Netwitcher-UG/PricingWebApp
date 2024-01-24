@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PricingWebApp.Data;
 using PricingWebApp.Data.Migrations;
@@ -14,6 +15,7 @@ namespace PricingWebApp.Controllers
             _context = context;
         }
         //=============== Employees/Table ============
+        [Authorize]
         public IActionResult EmployeesTable()
         {
             ViewData["reopenPopupNew"] = null;
@@ -30,6 +32,7 @@ namespace PricingWebApp.Controllers
 
         //=============== Employees/Create =============
         [HttpGet]
+        [Authorize]
         public ViewResult NewEmployee()
         {
             return View();
