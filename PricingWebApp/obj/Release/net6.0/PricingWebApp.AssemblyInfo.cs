@@ -16,7 +16,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PricingWebApp")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f3bf56a53031f4d1a6d363535a03b4fd1508293f")]
 [assembly: System.Reflection.AssemblyProductAttribute("PricingWebApp")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PricingWebApp")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
