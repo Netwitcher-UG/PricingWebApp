@@ -8,7 +8,7 @@
 <section class="content">
     <div class="container-fluid">
         <div class="row">
-            <h1 class="card-title w-100 text-center font-weight-bold font-family:sans-serif;" style="font-size:40px;"> </h1>
+            <h1 class="card-title w-100 font-weight-bold font-family:sans-serif;" style="font-size:40px;"> </h1>
             <div class="col-12">
 
                 @if (Model.Any())
@@ -43,31 +43,34 @@
                                         try
                                         {
                                             <tr>
-                                                <td width="10%" class="text-center">
+                                                <td width="12%">
                                                     @employee.FirstName
                                                 </td>
-                                                <td width="10%" class="text-center">
+                                                <td width="12%">
                                                     @employee.LastName
                                                 </td>
-                                                <td width="18%" class="text-center">
+                                                <td width="17%">
                                                     @employee.PhoneNo
                                                 </td>
-                                                <td width="18%" class="text-center">
+                                                <td width="17%">
                                                     @employee.Email
                                                 </td>
-                                                <td width="12%" class="text-center">
+                                                <td width="12%">
                                                     @employee.HourRate €
                                                 </td>
 
-                                                  <td >
+                                                <td width="10%">
                                                     <a data-url='@Url.Action($"EditEmployee/{employee.Id}")'
                                            id="edit+@employee.Id" data-toggle="modal"
-                                           data-target='#EditOne-@employee.Id' class="btn btn-success text-center " onclick="KnowMyEditBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
+                                           data-target='#EditOne-@employee.Id' class="btn btn-success" onclick="KnowMyEditBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
                                                     @await Html.PartialAsync("EditEmployee", employee)
                                                 </td>
 
                                                 <td width="10%">
-                                                    <a asp-action="DetailsEmployee" asp-route-id="@employee.Id" class="btn btn-secondary text-center"><i class="fa fa-eye"></i> View</a>
+                                                    <a data-url='@Url.Action($"DetailsEmployee/{employee.Id}")'
+                                                       id="details+@employee.Id" data-toggle="modal"
+                                                       data-target='#DetailsOne-@employee.Id' class="btn btn-secondary text-center"><i class="fa fa-eye"></i> View</a>
+                                                    @await Html.PartialAsync("DetailsEmployee", employee)
                                                 </td>
 
                                                 <td width="10%">
