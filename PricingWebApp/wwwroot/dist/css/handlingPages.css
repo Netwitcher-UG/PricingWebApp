@@ -82,9 +82,35 @@ body.sidebar-collapse .brand-link .brand-text {
     
     animation: my-animation 0.1s linear;
 }
-#example1 thead, tfoot {
-    font-size: 19px !important;
+
+
+
+@media (max-width: 900px) {
+    #example1 thead, tbody, tfoot {
+        font-size: 16px !important;
+        
+    }
 }
-#example1 tbody{
-    font-size:18px !important;
+@media (max-width: 700px) {
+    #example1 thead, tbody, tfoot {
+        font-size: 14px !important;
+    }
+}
+@media (max-width: 576px) {
+    #example1 thead, tbody, tfoot {
+        font-size: 10px !important;
+    }
+
+    #srcOurPages .my-page-src {
+        display: none;
+    }
+    #srcOurPages .my-page-title {
+        width: 100%;
+        text-align: center;
+    }
+}
+@media (min-width: 901px) {
+    #example1 thead, tbody, tfoot {
+        font-size: 18px !important;
+    }
 }
