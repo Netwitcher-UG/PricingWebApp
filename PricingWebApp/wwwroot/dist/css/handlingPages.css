@@ -7,7 +7,17 @@
 * {
     font-family: "Garet","Raleway" !important;
 }
-
+.btn-Edit {
+    color: #fff;
+    background-color: #edcb03;
+    border-color: #edcb03;
+    box-shadow: none;
+}
+.btn-Edit:hover {
+    color: #fff;
+    background-color: #ffd905;
+    border-color: #ffd905;
+}
 
 @media (max-width: 768px) {
     .animation__shake {

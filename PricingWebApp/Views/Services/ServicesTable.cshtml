@@ -44,7 +44,7 @@
                                                 <td>
                                                     <a data-url='@Url.Action($"_EditService/{service.Id}")'
                                            id="editservice+@service.Id" data-toggle="modal"
-                                           data-target='#EditService-@service.Id' class="btn btn-success text-center " onclick="KnowMyEditServiceBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
+                                           data-target='#EditService-@service.Id' class="btn btn-Edit text-center " onclick="KnowMyEditServiceBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
                                                     @await Html.PartialAsync("_EditService", service)
                                                 </td>
 
