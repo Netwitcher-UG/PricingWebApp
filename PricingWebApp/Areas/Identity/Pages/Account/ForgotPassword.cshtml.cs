@@ -1,5 +1,4 @@
-﻿#nullable disable
-
+﻿
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -13,7 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
-using PricingWebApp.Models; 
+
 
 namespace PricingWebApp.Areas.Identity.Pages.Account
 {
@@ -22,17 +21,9 @@ namespace PricingWebApp.Areas.Identity.Pages.Account
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
-        private readonly SMTP _smtpSettings;
+ 
 
-        public ForgotPasswordModel(
-            UserManager<IdentityUser> userManager,
-            IEmailSender emailSender,
-            IOptions<SMTP> smtpSettings)
-        {
-            _userManager = userManager;
-            _emailSender = emailSender;
-            _smtpSettings = smtpSettings.Value;
-        }
+      
 
         [BindProperty]
         public InputModel Input { get; set; }

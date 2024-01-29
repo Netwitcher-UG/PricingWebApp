@@ -15,12 +15,10 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 
 
-builder.Services.Configure<SMTP>(builder.Configuration.GetSection("SmtpSettings"));
-
-
-
-builder.Services.AddTransient<IEmailSender, YourEmailSenderImplementation>();
-
+builder.Services.ConfigureApplicationCookie(o => {
+    o.ExpireTimeSpan = TimeSpan.FromDays(5);
+    o.SlidingExpiration = true;
+});
 
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
