@@ -249,7 +249,7 @@ namespace PricingWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Employees");
+                    b.ToTable("Employees", (string)null);
                 });
 
             modelBuilder.Entity("PricingWebApp.Models.FixCosts", b =>
@@ -272,7 +272,7 @@ namespace PricingWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("FixCosts");
+                    b.ToTable("FixCosts", (string)null);
                 });
 
             modelBuilder.Entity("PricingWebApp.Models.PriceCalculation", b =>
@@ -309,7 +309,7 @@ namespace PricingWebApp.Data.Migrations
 
                     b.HasIndex("ServiceId");
 
-                    b.ToTable("PriceCalculation");
+                    b.ToTable("PriceCalculation", (string)null);
                 });
 
             modelBuilder.Entity("PricingWebApp.Models.PricePackages", b =>
@@ -342,7 +342,7 @@ namespace PricingWebApp.Data.Migrations
 
                     b.HasIndex("PriceCalculationId");
 
-                    b.ToTable("PricePackages");
+                    b.ToTable("PricePackages", (string)null);
                 });
 
             modelBuilder.Entity("PricingWebApp.Models.Projects", b =>
@@ -358,7 +358,7 @@ namespace PricingWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Projects");
+                    b.ToTable("Projects", (string)null);
                 });
 
             modelBuilder.Entity("PricingWebApp.Models.Services", b =>
@@ -374,7 +374,7 @@ namespace PricingWebApp.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Services");
+                    b.ToTable("Services", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
