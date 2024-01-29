@@ -253,7 +253,8 @@
                         <img src="~/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="#" class="d-block">@User.Identity.Name</a>
+                        <a href="#" class="d-block">@User.Identity.Name.Substring(0, Math.Min(8, User.Identity.Name.Length))</a>
+
                     </div>
                 </div>
 
