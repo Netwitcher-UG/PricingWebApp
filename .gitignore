@@ -8,3 +8,4 @@
 /PricingWebApp/appsettings.json
 /PricingWebApp/appsettings.Development.json
 *.dll
+*.vsidx
