@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Services>
+
+<div class="card " style="width:48%" id="pricingServicesCard">
+    <div class="card-header">
+        <h3 class="card-title">Services Selection</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table class="table table-bordered text-center" id="pricingServicesTable">
+
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th> Name</th>
+                    <th>Service Rate</th>
+                    <th> Count</th>
+                    <th style="width:25%">Sum</th>
+                </tr>
+            </thead>
+            <tbody id="pricingServices">
+                @foreach (var service in Model)
+                {
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" name="myServiceCheckbox" value="" id="myServiceCheckbox + @service.Id">
+                            </div>
+                        </td>
+                        <td>
+                            <label for="myServiceCheckbox + @service.Id" style="user-select :none"> @service.Title </label>
+                        </td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm" id="myInput1_@service.Id" value="" min="1">
+                        </td>
+                        <td>
+                            <input type="number" class="form-control form-control-sm" id="myInput2_@service.Id" value="" min="1">
+                        </td>
+                        <td>
+                            <input type="hidden" style="display:none" value="@service.Id">
+
+                            <span id="result_@service.Id"></span>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+
+
+    window.addEventListener('load', lockMyField);
+    document.getElementById("pricingServices").addEventListener("change", lockMyField);
+    function lockMyField() {
+        const checkboxes = document.querySelectorAll("#pricingServices input[type='checkbox']");
+
+        checkboxes.forEach(function (checkbox) {
+            const numberInputs = checkbox.closest("tr").querySelectorAll("input[type='number']");
+
+            if (checkbox.checked) {
+                numberInputs.forEach(function (input) {
+                    input.disabled = false;
+                });
+            } else {
+                numberInputs.forEach(function (input) {
+                    input.disabled = true;
+                    input.value = "";
+                });
+            }
+        });
+    }
+
+    const myFeilds = document.querySelectorAll('#pricingServices tr td input[type="number"]');
+
+    myFeilds.forEach(input => {
+        input.addEventListener("input", function () {
+            const rowId = this.closest("tr").querySelector("input[type='hidden']").value;
+            const spanId = "result_" + rowId;
+            const myFeild1Id = "myInput1_" + rowId;
+            const myFeild2Id = "myInput2_" + rowId;
+            const myFeild1 = document.getElementById(myFeild1Id);
+            const myFeild2 = document.getElementById(myFeild2Id);
+            if ((myFeild2.value == "" || myFeild2.value == null) && myFeild2.blur) { myFeild2.value = 1 };
+            if (myFeild1.value.length > 6) { myFeild1.value = 999999; }
+            if (myFeild2.value.length > 4) { myFeild2.value = 9999; }
+            myFeild1.addEventListener("focus", function () { this.select(); });
+            myFeild2.addEventListener("focus", function () { this.select(); });
+            const spanElement = document.getElementById(spanId);
+            spanElement.textContent = EuroSignal(result(myFeild1.value, myFeild2.value));
+        });
+    });
+
+    function result(x, y) {
+        return x * y;
+    }
+
+    function EuroSignal(elm) {
+        const x = new Intl.NumberFormat('de-DE', {
+            style: 'currency',
+            currency: 'EUR',
+        }).formatToParts(elm).map(
+            p => p.type != 'literal' && p.type != 'currency' ? p.value : ''
+        ).join('');
+        var y = x + "€"
+        return y;
+
+    }
+
+</script>

@@ -4,20 +4,24 @@
     --white-color: #f6f5f7;
     --yellow-color: #edcb03;
 }
-* {
-    font-family: "Garet","Raleway" !important;
+
+
+body {
+    font-family: Raleway !important;
 }
+
 .btn-Edit {
     color: #fff;
     background-color: #edcb03;
     border-color: #edcb03;
     box-shadow: none;
 }
-.btn-Edit:hover {
-    color: #fff;
-    background-color: #ffd905;
-    border-color: #ffd905;
-}
+
+    .btn-Edit:hover {
+        color: #fff;
+        background-color: #ffd905;
+        border-color: #ffd905;
+    }
 
 @media (max-width: 768px) {
     .animation__shake {
@@ -36,24 +40,24 @@
     align-items: center;
 }
 
-.brand-link .brand-image {
-    max-height: 85px;
-}
+    .brand-link .brand-image {
+        max-height: 85px;
+    }
 
 body.sidebar-collapse .brand-link {
     display: flex;
     justify-content: center;
 }
 
-body.sidebar-collapse .brand-link .brand-image {
-    max-height: 50px;
-    margin-right: 0px;
-    margin-left: 0px;
-}
+    body.sidebar-collapse .brand-link .brand-image {
+        max-height: 50px;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
 
-body.sidebar-collapse .brand-link .brand-text {
-    display: none;
-}
+    body.sidebar-collapse .brand-link .brand-text {
+        display: none;
+    }
 
 [class*=sidebar-dark] .brand-link .pushmenu:hover,
 [class*=sidebar-dark] .brand-link:hover,
@@ -81,15 +85,15 @@ body.sidebar-collapse .brand-link .brand-text {
 
 @keyframes my-animation {
     0% {
-        transform:scale(0)
+        transform: scale(0)
     }
 
     100% {
         transform: scale(1)
     }
 }
+
 .modal.fade.show .modal-dialog {
-    
     animation: my-animation 0.1s linear;
 }
 
@@ -98,27 +102,34 @@ body.sidebar-collapse .brand-link .brand-text {
 @media (max-width: 900px) {
     #example1 thead, tbody, tfoot {
         font-size: 16px !important;
-        
     }
 }
+
 @media (max-width: 700px) {
     #example1 thead, tbody, tfoot {
         font-size: 14px !important;
     }
 }
+
 @media (max-width: 576px) {
     #example1 thead, tbody, tfoot {
-        font-size: 10px !important;
+        font-size: 12px !important;
+    }
+
+    #example1 tbody a {
+        font-size: 12px !important;
     }
 
     #srcOurPages .my-page-src {
         display: none;
     }
+
     #srcOurPages .my-page-title {
         width: 100%;
         text-align: center;
     }
 }
+
 @media (min-width: 901px) {
     #example1 thead, tbody, tfoot {
         font-size: 18px !important;

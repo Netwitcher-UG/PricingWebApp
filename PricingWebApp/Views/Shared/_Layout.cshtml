@@ -270,7 +270,7 @@
                             </a>
                             <ul class="nav nav-treeview">
                                 <li class="nav-item">
-                                    <a href="pages/layout/top-nav.html" class="nav-link" id="">
+                                    <a asp-controller="PricingCalculationPage" asp-action="CalculationPage" class="nav-link" id="">
                                         <i class="bi bi-calculator nav-icon"></i>
                                         <p>
                                             Price calculator
@@ -350,11 +350,12 @@
             <!-- /.content -->
         </div>
         <!-- /.content-wrapper -->
+        @using System.Reflection
         <footer class="main-footer">
-            <strong>Copyright &copy; 2024 <a href="https://netwitcher.com">NetWitcher</a>.</strong>
+            <strong>Copyright &copy; 2024 <a href="https://netwitcher.com"> NetWitcher </a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
-                <b>Version</b> 3.2.0
+                <b>Version</b> @System.Reflection.Assembly.GetExecutingAssembly().GetName().Version
             </div>
         </footer>
 

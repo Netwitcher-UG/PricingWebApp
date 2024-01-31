@@ -5,6 +5,9 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>aspnet-PricingWebApp-292ba1ed-8655-4417-a03b-4f135e6e6f85</UserSecretsId>
+    <Version>1.0.0</Version>
+    <Company>Netwitcher</Company>
+    <Copyright>Copyright © 2024</Copyright>
   </PropertyGroup>
 
   <ItemGroup>
