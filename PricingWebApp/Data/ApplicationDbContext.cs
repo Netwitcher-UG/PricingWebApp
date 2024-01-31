@@ -4,8 +4,11 @@ using PricingWebApp.Models;
 
 namespace PricingWebApp.Data
 {
+
     public class ApplicationDbContext : IdentityDbContext
     {
+
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -17,5 +20,7 @@ namespace PricingWebApp.Data
         public DbSet<Employees> Employees { get; set; }
         public DbSet<PriceCalculation> PriceCalculation { get; set; }
         public DbSet<PricePackages> PricePackages { get; set; }
+
+
     }
 }

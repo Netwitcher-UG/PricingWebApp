@@ -5,5 +5,8 @@ namespace PricingWebApp.Models
         public int Id { get; set; }
 
         public string? Title { get; set; }
+
+        //public  List<PriceCalculation> PriceCalculation { get; set; }
+
     }
 }

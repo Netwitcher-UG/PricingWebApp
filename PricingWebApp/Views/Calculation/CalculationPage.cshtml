@@ -1,0 +1,79 @@
+@model IEnumerable<IGrouping<int, PriceCalculation>>
+
+
+@{
+    ViewData["Title"] = "CalculationPage";
+}
+
+
+<h4 class="mb-2 mt-4">Cards</h4>
+<h5 class="mb-2">Abilities</h5>
+<div class="row">
+
+    @foreach (IGrouping<int, PriceCalculation> price in Model)
+    {
+    
+        var proId = 0;
+        @foreach (PriceCalculation priceCalculation in price.Select(y=>y))
+        {
+           
+            if(proId != @priceCalculation.Project.Id)
+            {
+
+                proId = @priceCalculation.Project.Id;
+                <div class="col-md-3">
+                    <div class="card card-primary collapsed-card">
+                        <div class="card-header">
+                            <h3 class="card-title">@priceCalculation.Project.Title</h3>
+
+
+                            <div class="card-tools">
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <div class="card-body">
+                            @foreach (PriceCalculation Calculation in price.Select(y => y))
+                            {
+                                if (proId == @priceCalculation.Project.Id)
+                                {
+
+                                    <label>Title service:   <span>@Calculation.Service.Title</span></label>
+                                    <label>  (Cost service: <span> @Calculation.ServiceCost </span>)</label>
+                                    <br />
+                
+                                <label>   (count service: <span> @Calculation.Count </span>)</label>
+
+
+                                <br />
+                                <label>    <span>Totla price Service : @(@Calculation.ServiceCost * @Calculation.Count)</span></label>
+                                    <br />
+                                    <label>Employee Name :   <span>@Calculation.Employee.FirstName</span></label>
+                                    <br />
+                                    <label> FixCost: <span>@Calculation.FixCost</span></label>
+
+                                    <br />
+                            }
+                            }
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+
+
+            }
+           
+
+            
+        }
+    }
+</div>
+

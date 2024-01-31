@@ -11,5 +11,9 @@ namespace PricingWebApp.Models
         public string? PhoneNo { get; set; }
         public string? Email { get; set; }
         public double HourRate { get; set; }
+
+        //public List<PriceCalculation> PriceCalculation { get; set; }
+
+
     }
 }

@@ -431,15 +431,15 @@ namespace PricingWebApp.Data.Migrations
             modelBuilder.Entity("PricingWebApp.Models.PriceCalculation", b =>
                 {
                     b.HasOne("PricingWebApp.Models.Employees", "Employee")
-                        .WithMany()
+                        .WithMany("PriceCalculation")
                         .HasForeignKey("EmployeeId");
 
                     b.HasOne("PricingWebApp.Models.Projects", "Project")
-                        .WithMany()
+                        .WithMany("PriceCalculation")
                         .HasForeignKey("ProjectId");
 
                     b.HasOne("PricingWebApp.Models.Services", "Service")
-                        .WithMany()
+                        .WithMany("PriceCalculation")
                         .HasForeignKey("ServiceId");
 
                     b.Navigation("Employee");
@@ -457,6 +457,21 @@ namespace PricingWebApp.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("PriceCalculation");
+                });
+
+            modelBuilder.Entity("PricingWebApp.Models.Employees", b =>
+                {
+                    b.Navigation("PriceCalculation");
+                });
+
+            modelBuilder.Entity("PricingWebApp.Models.Projects", b =>
+                {
+                    b.Navigation("PriceCalculation");
+                });
+
+            modelBuilder.Entity("PricingWebApp.Models.Services", b =>
+                {
                     b.Navigation("PriceCalculation");
                 });
 #pragma warning restore 612, 618
