@@ -17,8 +17,8 @@
                         <div class="card-header">
 
                             <div class="w-50">
-                               
-                                <a id="mybtn" data-toggle="modal" data-target="#addone" 
+
+                                <a id="mybtn" data-toggle="modal" data-target="#addone"
                                class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Fix Cost</a>
                                 @await Html.PartialAsync("_NewFixCost", new FixCosts())
                             </div>
@@ -46,20 +46,20 @@
                                                     @fixcost.Title
                                                 </td>
                                                 <td class="myMonthlyCostTds">
-                                                    
-                                                    @fixcost.MonthlyCost  
+
+                                                    @fixcost.MonthlyCost
                                                 </td>
                                                 <td>
                                                     @fixcost.LastUpdate.ToString("dd-MM-yyyy")
                                                 </td>
-                                                <td >
+                                                <td>
                                                     <a data-url='@Url.Action($"_EditFixCost/{fixcost.Id}")'
                                            id="edit+@fixcost.Id" data-toggle="modal"
-                                           data-target='#EditOne-@fixcost.Id' class="btn btn-success text-center " onclick="KnowMyEditBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
+                                           data-target='#EditOne-@fixcost.Id' class="btn btn-Edit text-center " onclick="KnowMyEditBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
                                                     @await Html.PartialAsync("_EditFixCost", fixcost)
                                                 </td>
 
-                                                <td >
+                                                <td>
                                                     <a data-url='@Url.Action($"_DeleteFixCost/{fixcost.Id}")'
                                            id="delete+@fixcost.Id" data-toggle="modal"
                                            data-target='#DeleteOne-@fixcost.Id' class="btn btn-danger text-left"><i class="bi bi-trash"></i> Delete</a>
@@ -156,7 +156,7 @@
     }
 </script>
 <script>
-    function checksaved(title,n){
+    function checksaved(title, n) {
         setTimeout(function () {
             if (n == true) { toastr.success(title); }
             else { toastr.error(title) }
@@ -164,16 +164,20 @@
     }
 </script>
 
-@if (TempData["Successaddnewfixcost"] != null ){
-    <script>checksaved('Added successfully',true);</script>
+@if (TempData["Successaddnewfixcost"] != null)
+{
+    <script>checksaved('Added successfully', true);</script>
 }
-@if(TempData["Filseaddnewfixcost"] != null){
-    <script>checksaved('Add failed',false) </script>
+@if (TempData["Filseaddnewfixcost"] != null)
+{
+    <script>checksaved('Add failed', false)</script>
 }
-@if (TempData["Successeditfixcost"] != null){
+@if (TempData["Successeditfixcost"] != null)
+{
     <script>checksaved('Update successfully', true);</script>
 }
-@if (TempData["Filseditfixcost"] != null){
+@if (TempData["Filseditfixcost"] != null)
+{
     <script>checksaved('Update failed', false)</script>
 }
 @if (TempData["Successdeletefixcost"] != null)
@@ -188,14 +192,14 @@
 
 
 <script>
-        
-     const myTableBtnShowMore = document.querySelector('#myFixCostsTbody tr > td:first-child');
-     const myTbody = document.querySelector('#myFixCostsTbody');
 
-     function changeMyMonthlyCost(){
+    const myTableBtnShowMore = document.querySelector('#myFixCostsTbody tr > td:first-child');
+    const myTbody = document.querySelector('#myFixCostsTbody');
+
+    function changeMyMonthlyCost() {
         const myMonthlyCost = myTbody.querySelectorAll(".myMonthlyCostTds");
-       myMonthlyCost.forEach(function(elm) {
-           const x = new Intl.NumberFormat('de-DE', {
+        myMonthlyCost.forEach(function (elm) {
+            const x = new Intl.NumberFormat('de-DE', {
                 style: 'currency',
                 currency: 'EUR',
             }).formatToParts(elm.textContent).map(
@@ -203,75 +207,75 @@
             ).join('')
             elm.textContent = x + " €";
         });
-     }
-        
-     function countCulomn(){
-         let visibleColumnsCount = 0;
-         const firstRow = myTbody.querySelectorAll('tr');
-         const tdsInFirstTr = firstRow[0].querySelectorAll('td');
-         tdsInFirstTr.forEach(function(element){
-                 if (element.style.display === 'none') {  visibleColumnsCount++;  }
-           });        
-         return visibleColumnsCount;
-     }
+    }
+
+    function countCulomn() {
+        let visibleColumnsCount = 0;
+        const firstRow = myTbody.querySelectorAll('tr');
+        const tdsInFirstTr = firstRow[0].querySelectorAll('td');
+        tdsInFirstTr.forEach(function (element) {
+            if (element.style.display === 'none') { visibleColumnsCount++; }
+        });
+        return visibleColumnsCount;
+    }
     window.addEventListener('load', changeMyMonthlyCost);
-    window.addEventListener('load',changMyModalID );
-    window.addEventListener('resize',changMyModalID );
+    window.addEventListener('load', changMyModalID);
+    window.addEventListener('resize', changMyModalID);
 
     function changMyModalID() {
 
-    const elements = myTbody.querySelectorAll('*');
+        const elements = myTbody.querySelectorAll('*');
 
-    const myTrShowMore = myTbody.querySelectorAll("tr.dt-hasChild");
-    const firstChildElements = [];
-    for (const trElement of myTrShowMore) {
-        firstChildElements.push(trElement.querySelector("td"));
-    }
-    if(firstChildElements.length == 1){
-        firstChildElements[0].click();
-    }else if(firstChildElements.length > 1){
-        location.reload();
-    }
+        const myTrShowMore = myTbody.querySelectorAll("tr.dt-hasChild");
+        const firstChildElements = [];
+        for (const trElement of myTrShowMore) {
+            firstChildElements.push(trElement.querySelector("td"));
+        }
+        if (firstChildElements.length == 1) {
+            firstChildElements[0].click();
+        } else if (firstChildElements.length > 1) {
+            location.reload();
+        }
 
-    setTimeout(function () {
-        elements.forEach(function (element) {
-            if (countCulomn() == 1 && element.id) {
+        setTimeout(function () {
+            elements.forEach(function (element) {
+                if (countCulomn() == 1 && element.id) {
 
-                if (element.id.includes("notDelete")) {
-
-                } else if (element.id.slice(0, 6) === 'Delete') {
-                    const index = element.id.indexOf("not");
-                    if (index !== -1) { return; }
-                    element.id = "not" + element.id;
-                }
-                if (element.id.includes("notEdit")) {
-                    element.id = element.id.slice(3, element.id.length);
-                }
-            } else if (countCulomn() >= 2 && element.id) {
-                if (element.id.includes("notDelete") && element.id.includes("notEdit")) {
-                } else {
                     if (element.id.includes("notDelete")) {
+
                     } else if (element.id.slice(0, 6) === 'Delete') {
                         const index = element.id.indexOf("not");
                         if (index !== -1) { return; }
                         element.id = "not" + element.id;
                     }
                     if (element.id.includes("notEdit")) {
-                    } else if (element.id.slice(0, 4) === 'Edit') {
-                        const index = element.id.indexOf("not");
-                        if (index !== -1) { return; }
-                        element.id = "not" + element.id;
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                } else if (countCulomn() >= 2 && element.id) {
+                    if (element.id.includes("notDelete") && element.id.includes("notEdit")) {
+                    } else {
+                        if (element.id.includes("notDelete")) {
+                        } else if (element.id.slice(0, 6) === 'Delete') {
+                            const index = element.id.indexOf("not");
+                            if (index !== -1) { return; }
+                            element.id = "not" + element.id;
+                        }
+                        if (element.id.includes("notEdit")) {
+                        } else if (element.id.slice(0, 4) === 'Edit') {
+                            const index = element.id.indexOf("not");
+                            if (index !== -1) { return; }
+                            element.id = "not" + element.id;
+                        }
+                    }
+                } else if (countCulomn() == 0 && element.id && element.id.includes("not")) {
+                    if (element.id.includes("notDelete")) {
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                    if (element.id.includes("notEdit")) {
+                        element.id = element.id.slice(3, element.id.length);
                     }
                 }
-            } else if (countCulomn() == 0 && element.id && element.id.includes("not")) {
-                if (element.id.includes("notDelete")) {
-                    element.id = element.id.slice(3, element.id.length);
-                }
-                if (element.id.includes("notEdit")) {
-                    element.id = element.id.slice(3, element.id.length);
-                }
-            }
-        });
-    }, 400);
-}
+            });
+        }, 400);
+    }
 </script>

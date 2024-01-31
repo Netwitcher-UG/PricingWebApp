@@ -10,7 +10,7 @@ namespace PricingWebApp.Controllers
         private readonly ApplicationDbContext _context;
         public ServicesController(ApplicationDbContext context)
         {
-            _context = context;    
+            _context = context;
         }
         public async Task<IActionResult> ServicesTable()
         {
@@ -103,14 +103,5 @@ namespace PricingWebApp.Controllers
                 return RedirectToAction("Error", new { errorMessage = ex.Message });
             }
         }
-
-
-
-
-
-
-
-
-
     }
 }

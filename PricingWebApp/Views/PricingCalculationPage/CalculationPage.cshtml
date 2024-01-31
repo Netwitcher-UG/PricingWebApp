@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Pricing Calculation Page";
+}
+
+
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class=" d-flex justify-content-around flex-wrap" id="myMainPagePricingCalculation" style="width:100%">
+
+                            <partial name="_EmployeesSelection" model="@ViewBag.employeesModel"  />
+                            <partial name="_ServicesSelection" model="@ViewBag.servicesModel"  />
+                            <partial name="_ServicesSelection" model="@ViewBag.servicesModel" />
+                            <partial name="_ServicesSelection" model="@ViewBag.servicesModel" />
+ 
+                         </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+<script>
+    window.addEventListener('resize', function () {
+        const mediaQuery = window.matchMedia('(max-width: 1200px)');
+
+        if (mediaQuery.matches) {
+            document.querySelectorAll('#myMainPagePricingCalculation .card').forEach((card) => {
+                card.style.width = '100%';
+            });
+        }else{
+            document.querySelectorAll('#myMainPagePricingCalculation .card').forEach((card) => {
+                card.style.width = '48%';
+            });
+        }
+    });
+
+</script>

@@ -1,10 +1,27 @@
 ﻿:root {
-    --purple-color: #462746;
-    --blue-color: #0075ff;
-    --white-color: #fff;
-    --yellow-color: #FFFF00;
+    --purple-color: #180344;
+    --blue-color: #279eed;
+    --white-color: #f6f5f7;
+    --yellow-color: #edcb03;
 }
 
+
+body {
+    font-family: Raleway !important;
+}
+
+.btn-Edit {
+    color: #fff;
+    background-color: #edcb03;
+    border-color: #edcb03;
+    box-shadow: none;
+}
+
+    .btn-Edit:hover {
+        color: #fff;
+        background-color: #ffd905;
+        border-color: #ffd905;
+    }
 
 @media (max-width: 768px) {
     .animation__shake {
@@ -42,11 +59,15 @@ body.sidebar-collapse .brand-link {
         display: none;
     }
 
-[class*=sidebar-dark] .brand-link .pushmenu:hover, [class*=sidebar-dark] .brand-link:hover, [class*=sidebar-dark-] .user-panel a:hover {
+[class*=sidebar-dark] .brand-link .pushmenu:hover,
+[class*=sidebar-dark] .brand-link:hover,
+[class*=sidebar-dark-] .user-panel a:hover {
     color: var(--yellow-color);
 }
 
-.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover, .nav-pills .nav-link:not(.active):hover {
+.navbar-light .navbar-nav .nav-link:focus,
+.navbar-light .navbar-nav .nav-link:hover,
+.nav-pills .nav-link:not(.active):hover {
     color: var(--blue-color)
 }
 
@@ -60,4 +81,57 @@ body.sidebar-collapse .brand-link {
 
 .bg-gradient-info {
     background-color: var(--blue-color) !important;
+}
+
+@keyframes my-animation {
+    0% {
+        transform: scale(0)
+    }
+
+    100% {
+        transform: scale(1)
+    }
+}
+
+.modal.fade.show .modal-dialog {
+    animation: my-animation 0.1s linear;
+}
+
+
+
+@media (max-width: 900px) {
+    #example1 thead, tbody, tfoot {
+        font-size: 16px !important;
+    }
+}
+
+@media (max-width: 700px) {
+    #example1 thead, tbody, tfoot {
+        font-size: 14px !important;
+    }
+}
+
+@media (max-width: 576px) {
+    #example1 thead, tbody, tfoot {
+        font-size: 12px !important;
+    }
+
+    #example1 tbody a {
+        font-size: 12px !important;
+    }
+
+    #srcOurPages .my-page-src {
+        display: none;
+    }
+
+    #srcOurPages .my-page-title {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (min-width: 901px) {
+    #example1 thead, tbody, tfoot {
+        font-size: 18px !important;
+    }
 }
