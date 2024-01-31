@@ -20,8 +20,6 @@ namespace PricingWebApp.Controllers
         }
         [Authorize]
         public IActionResult Privacy()
-
-
         {
             return View();
         }
