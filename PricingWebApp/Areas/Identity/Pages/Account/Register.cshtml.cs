@@ -24,6 +24,7 @@ using Microsoft.Extensions.Logging;
 
 namespace PricingWebApp.Areas.Identity.Pages.Account
 {
+    [Authorize]
     public class RegisterModel : PageModel
     {
         private readonly SignInManager<IdentityUser> _signInManager;

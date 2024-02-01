@@ -15,7 +15,7 @@ namespace PricingWebApp.Controllers
             _context = context;
         }
         //=============== Employees/Table ============
-        [Authorize(Roles = "Admin")]
+      //  [Authorize(Roles = "Admin")]
         public IActionResult EmployeesTable()
         {
             ViewData["reopenPopupNew"] = null;

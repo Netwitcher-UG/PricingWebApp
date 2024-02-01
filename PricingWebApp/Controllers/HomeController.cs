@@ -13,12 +13,15 @@ namespace PricingWebApp.Controllers
         {
             _logger = logger;
         }
+
         [Authorize]
         public IActionResult Index()
         {
+            Response.Headers["Cache-Control"] = "no-store, must-revalidate";
+
             return View();
         }
-        [Authorize]
+
         public IActionResult Privacy()
         {
             return View();
