@@ -52,7 +52,7 @@
                                                 <td width="17%">
                                                     @employee.PhoneNo
                                                 </td>
-                                                <td width="17%">
+                                                <td width="15%">
                                                     @employee.Email
                                                 </td>
                                                 <td width="12%">
@@ -73,7 +73,7 @@
                                                     @await Html.PartialAsync("DetailsEmployee", employee)
                                                 </td>
 
-                                                <td width="10%">
+                                                <td width="12%">
                                                     <a data-url='@Url.Action($"DeleteEmployee/{employee.Id}")'
                                                        id="delete+@employee.Id" data-toggle="modal"
                                                        data-target='#DeleteOne-@employee.Id' class="btn btn-danger text-left"><i class="bi bi-trash"></i> Delete</a>
