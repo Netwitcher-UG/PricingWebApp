@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using PricingWebApp.Data;
@@ -20,9 +20,10 @@ namespace PricingWebApp.Controllers
 
             IEnumerable<Employees> employeesModel = _context.Employees.ToList();
             IEnumerable<Services> servicesModel = _context.Services.ToList();
-
+           
             ViewBag.employeesModel = employeesModel;
             ViewBag.servicesModel = servicesModel;
+         
             return View();
         }
 
