@@ -1,23 +1,28 @@
+@using static PricingWebApp.Controllers.PricingCalculationPageController
+@model MyPagesModels
 @{
     ViewData["Title"] = "Pricing Calculation Page";
 }
 
 
-            <!-- Main content -->
-            <section class="content">
-                <div class="container-fluid">
-                    <div class="row">
-                        <div class=" d-flex justify-content-around flex-wrap" id="myMainPagePricingCalculation" style="width:100%">
+<!-- Main content -->
+<section class="content">
 
-                            <partial name="_EmployeesSelection" model="@ViewBag.employeesModel"  />
-                            <partial name="_ServicesSelection" model="@ViewBag.servicesModel"  />
-                            <partial name="_ServicesSelection" model="@ViewBag.servicesModel" />
-                            <partial name="_ServicesSelection" model="@ViewBag.servicesModel" />
-                <partial name="_PackagesSelection"  />
-                         </div>
-                    </div>
-                </div>
-            </section>
+    <form method="post" asp-controller="PricingCalculationPage" asp-action="PackagesSelection">
+        <div class="w-100">
+            <div class="w-50">
+                <input asp-for="MyTitle" id="myPriceCalculationTitle" placeholder="name of calculate ..." autocomplete="off" required />
+            </div>
+        </div>
+        <br />
+        <div class=" d-flex justify-content-spacebetween " id="myMainPagePricingCalculation" style="width:100%; display:flex;justify-content: space-between;">
+            <partial name="_EmployeesSelection" />
+            <partial name="_ServicesSelection" />
+        </div>
+        <partial name="_ProfitAndDiscounts" />
+    </form>
+
+</section>
 
 
 
@@ -29,11 +34,19 @@
             document.querySelectorAll('#myMainPagePricingCalculation .card').forEach((card) => {
                 card.style.width = '100%';
             });
-        }else{
+        } else {
             document.querySelectorAll('#myMainPagePricingCalculation .card').forEach((card) => {
                 card.style.width = '48%';
             });
         }
     });
+    const myPriceCalculationTitleField = document.querySelector("#myPriceCalculationTitle");
 
+    myPriceCalculationTitleField.addEventListener("focus", () => field.select());
+    myPriceCalculationTitleField.addEventListener("input", myPriceCalculationTitleField_input);
+
+    window.addEventListener('load', () => myPriceCalculationTitleField.value = "");
+    function myPriceCalculationTitleField_input() {
+        this.value = this.value.length > 20 ? this.value.substring(0, 20) : this.value;
+    }
 </script>

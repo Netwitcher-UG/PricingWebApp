@@ -1,6 +1,7 @@
-﻿@model IEnumerable<Employees>
+﻿@using static PricingWebApp.Controllers.PricingCalculationPageController
+@model MyPagesModels
 
-<div class="card" style="width:48%">
+<div class="card" style="width:49%">
     <div class="card-header">
         <h3 class="card-title">Employees Selection</h3>
     </div>
@@ -10,39 +11,36 @@
 
             <thead>
                 <tr>
-                    <th style="width: 10px">#</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Hour Rate</th>
-                    <th style="width: 120px">Hour Count</th>
-                    <th style="width: 40px">Sum</th>
+                    <th style="width: 10%">#</th>
+                    <th style="width:25%">Name</th>
+                    <th style="width: 20%">Hour Rate</th>
+                    <th style="width: 20%">Hour Count</th>
+                    <th style="width: 25%">Sum</th>
                 </tr>
             </thead>
             <tbody id="pricingEmployees">
-                @foreach (var employee in Model)
+
+                @for (int i = 0; i < Model.EmployeesModel?.Count(); i++)
                 {
                     <tr>
                         <td>
                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" name="myEmployeeCheckbox" value="" id="myEmployeeCheckbox + @employee.Id">
+                                <input class="form-check-input" type="checkbox" asp-for="MyEmployeesRows[i].IsChecked" id="myEmployeeCheckbox_@Model.EmployeesModel[i].Id">
                             </div>
                         </td>
                         <td>
-                            <label for="myEmployeeCheckbox + @employee.Id" style="user-select :none"> @employee.FirstName </label>
+                            <label for="myEmployeeCheckbox_@Model.EmployeesModel[i].Id" style="user-select :none"> @Model.EmployeesModel[i].FirstName @Model.EmployeesModel[i].LastName </label>
                         </td>
                         <td>
-                            <label for="myEmployeeCheckbox + @employee.Id" style="user-select :none"> @employee.LastName </label>
+                            <label for="myEmployeeCheckbox_@Model.EmployeesModel[i].Id" style="user-select :none;"> @Model.EmployeesModel[i].HourRate </label>
+                            <span id="myEmployeeHourRate_@Model.EmployeesModel[i].Id" style="display:none;">@Model.EmployeesModel[i].HourRate</span>
                         </td>
                         <td>
-                            <label for="myEmployeeCheckbox + @employee.Id" style="user-select :none"> @employee.HourRate </label>
-                            <span id="myEmployeeHourRate_@employee.Id" style="display:none;">@employee.HourRate</span>
+                            <input type="number" asp-for="MyEmployeesRows[i].EmployeeCount" class="form-control form-control-sm" id="myEmployeeInput_@Model.EmployeesModel[i].Id" min="1">
                         </td>
                         <td>
-                            <input type="number" class="form-control form-control-sm" id="myInput1_@employee.Id" value="" min="1">
-                        </td>
-                        <td>
-                            <input type="hidden" style="display:none" value="@employee.Id">
-                            <span id="result_@employee.Id"></span>
+                            <input type="hidden" asp-for="MyEmployeesRows[i].Id" style="display:none" value="@Model.EmployeesModel[i].Id">
+                            <span id="resultEmployee_@Model.EmployeesModel[i].Id"></span>
                         </td>
 
                     </tr>
@@ -73,7 +71,7 @@
                     input.disabled = true;
                     input.value = "";
 
-                    const spanId = "result_" + input.closest("tr").querySelector("input[type='hidden']").value;
+                    const spanId = "resultEmployee_" + input.closest("tr").querySelector("input[type='hidden']").value;
                     const spanElement = document.getElementById(spanId);
                     spanElement.textContent = "";
                 });
@@ -86,22 +84,18 @@
     myFeilds.forEach(input => {
         input.addEventListener("input", function () {
             const rowId = this.closest("tr").querySelector("input[type='hidden']").value;
-            const spanId = "result_" + rowId;
-            const myFeild1Id = "myInput1_" + rowId;
+            const spanId = "resultEmployee_" + rowId;
+            const myFeild1Id = "myEmployeeInput_" + rowId;
             const myFeild1 = document.getElementById(myFeild1Id);
             const employeeHourRate = document.getElementById("myEmployeeHourRate_" + rowId).textContent;
             if (myFeild1.value.length > 6) { myFeild1.value = 999999; }
             myFeild1.addEventListener("focus", function () { this.select(); });
             const spanElement = document.getElementById(spanId);
-            spanElement.textContent = EuroSignal(result(employeeHourRate, myFeild1.value));
+            spanElement.textContent = EuroEmployeeSignal(employeeHourRate * myFeild1.value);
         });
     });
 
-    function result(x, y) {
-        return x * y;
-    }
-
-    function EuroSignal(elm) {
+    function EuroEmployeeSignal(elm) {
         const x = new Intl.NumberFormat('de-DE', {
             style: 'currency',
             currency: 'EUR',
@@ -113,13 +107,5 @@
 
     }
 
-    function selectAll(input) {
-
-        const start = input.selectionStart;
-        const end = input.value.length + 1;
-
-        // Set the selection to the entire input
-        input.setSelectionRange(start, end);
-    }
 
 </script>
