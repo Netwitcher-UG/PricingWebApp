@@ -1,0 +1,49 @@
+﻿@using static PricingWebApp.Controllers.PricingCalculationPageController
+@model MyPagesModels
+
+
+<div class="card-body" style="width:100%;background:#fff;" id="pricingServicesCard">
+    <table class="table table-bordered text-center" id="pricingServicesTable">
+
+        <thead>
+            <tr>
+                <th style="width:50%">Profit Ratio</th>
+                <th style="width:50%">Discount Percentage</th>
+
+            </tr>
+        </thead>
+        <tbody id="ProfitAndDiscountsfeilds">
+            <tr>
+                <td>
+                    <input type="number" asp-for="ProfitRatio" id="myProfitRatio" required min="0" />
+                </td>
+                <td>
+                    <input type="number" asp-for="Discount" id="myDiscount" required min="0" />
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+<input type="submit" value="calculate price" class="btn btn-primary w-100" />
+
+
+<script>
+
+    const fields = document.querySelectorAll("#ProfitAndDiscountsfeilds input[type='number']");
+    fields.forEach(field => {
+        field.addEventListener("focus", () => field.select());
+        field.addEventListener("input", ProfitRatio_Discount_input);
+        field.style.textAlign = "left";
+        field.style.paddingRight = "10px";
+        field.insertAdjacentHTML("afterend", "<span>%</span>");
+        field.style.width = "80px";
+    });
+    window.addEventListener('load', () => fields.forEach(field => field.value = ""));
+    function ProfitRatio_Discount_input() {
+        this.value = this.value.length > 4 ? 9999 : this.value;
+    }
+
+
+
+</script>
