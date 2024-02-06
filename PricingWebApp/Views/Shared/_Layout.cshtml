@@ -63,8 +63,8 @@
     <div class="wrapper">
 
         <!-- Preloader -->
-        <div class="preloader flex-column justify-content-center align-items-center" style="background-color:#fff">
-            <img class="animation__shake" src="~/dist/img/Netwitcher_wand.gif"
+        <div class="preloader flex-column justify-content-center align-items-center" style="background-color:#fff;">
+            <img class="" src="~/dist/img/Netwitcher_wand.gif" style="width:20vw;"
                  alt="NetWitcherLogo">
         </div>
 
@@ -333,7 +333,7 @@
                 <div class="container-fluid">
                     <div class="row mb-2" id="srcOurPages">
                         <div class="col-sm-6 my-page-title">
-                            <h1 class="m-0">@ViewData["Title"]</h1>
+                            <h1 id="MyPageTitleLeft" class="m-0">@ViewData["Title"]</h1>
                         </div><!-- /.col -->
                         <div class="col-sm-6 my-page-src">
                             <ol class="breadcrumb float-sm-right">
@@ -443,7 +443,7 @@
             const links = document.querySelectorAll('ul[id = "nav_sidebar"] li a');
             const myLis = document.querySelectorAll('ul[id = "nav_sidebar"] li');
             const myLisSon = document.querySelectorAll('ul[id = "nav_sidebar"] li ul li a');
-
+            const MyPageTitleLeft = document.getElementById("MyPageTitleLeft");
             links.forEach(link => {
                 if (link.getAttribute('href') == location.pathname) {
                     link.classList.add("active");
@@ -462,6 +462,12 @@
                 }
             });
             showOrHiddenSidebarBtn();
+            
+            if (location.pathname == "/PricingCalculationPage/CalculationPage"){
+               MyPageTitleLeft.style.display = "none";
+            }else{
+                MyPageTitleLeft.style.display = "block";
+            }
         }
         window.addEventListener('resize', showOrHiddenSidebarBtn);
         function showOrHiddenSidebarBtn() {

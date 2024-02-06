@@ -99,7 +99,18 @@
             spanElement.textContent = EuroSignalService(myFeild1.value * myFeild2.value);
         });
     });
+    const myTrService = document.querySelectorAll('#pricingServices tr');
 
+    myTrService.forEach(input => {
+        const rowId = input.querySelector("td input[type='hidden']").value;
+        const myFeild1 = document.getElementById("myServiceInput1_" + rowId);
+        const myFeild2 = document.getElementById("myServiceInput2_" + rowId);
+        const spanElement = document.getElementById("Serviceresult_" + rowId);
+        myFeild1.addEventListener("focus", function () { this.select(); });
+        myFeild2.addEventListener("focus", function () { this.select(); });
+        spanElement.textContent = EuroSignalService(myFeild1.value * myFeild2.value);
+    }
+    );
 
 
     function EuroSignalService(elm) {
