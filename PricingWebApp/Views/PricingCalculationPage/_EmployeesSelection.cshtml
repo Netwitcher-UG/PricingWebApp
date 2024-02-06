@@ -94,6 +94,18 @@
             spanElement.textContent = EuroEmployeeSignal(employeeHourRate * myFeild1.value);
         });
     });
+    const myTrEmployee = document.querySelectorAll('#pricingEmployees tr');
+
+    myTrEmployee.forEach(input => {
+        const rowId = input.querySelector("td input[type='hidden']").value;
+        const spanId = "resultEmployee_" + rowId;
+        const myFeild1 = document.getElementById("myEmployeeInput_"+rowId);
+        const employeeHourRate = document.getElementById("myEmployeeHourRate_" + rowId).textContent;
+        const spanElement = document.getElementById(spanId);
+        spanElement.textContent = EuroEmployeeSignal(employeeHourRate * myFeild1.value);
+        myFeild1.addEventListener("focus", function () { this.select(); });
+    }
+    );
 
     function EuroEmployeeSignal(elm) {
         const x = new Intl.NumberFormat('de-DE', {

@@ -41,16 +41,14 @@ namespace PricingWebApp.Controllers
             [BindProperty]
             public int Discount { get; set; }
         }
-        [HttpGet]
-        public IActionResult CalculationPage()
+        public MyPagesModels CalculationPageData()
         {
-
             List<Employees> employees = _context.Employees.ToList();
             List<Services> services = _context.Services.ToList();
             List<MyServicesRows> mySerListRows = new();
             for (int i = 0; i < services.Count; i++)
             {
-                mySerListRows.Add(new MyServicesRows() );
+                mySerListRows.Add(new MyServicesRows());
             }
             List<MyEmployeesRows> myEmpListRows = new();
             for (int i = 0; i < employees.Count; i++)
@@ -64,11 +62,15 @@ namespace PricingWebApp.Controllers
                 MyServicesRows = mySerListRows,
                 MyEmployeesRows = myEmpListRows
             };
-
-            return View(myModel);
+            return myModel;
+        }
+        [HttpGet]
+        public IActionResult CalculationPage()
+        {
+            return View(CalculationPageData());
         }
         [HttpPost]
-        public IActionResult PackagesSelection(MyPagesModels myServicesRowsModel)
+        public IActionResult CalculationPage(MyPagesModels myServicesRowsModel)
         { 
             if(myServicesRowsModel.MyEmployeesRows != null && myServicesRowsModel.MyServicesRows != null)
             { 
@@ -82,15 +84,14 @@ namespace PricingWebApp.Controllers
                 Calculator calculator = new(myEmployees, MyEmployeesRows, MyServicesRows, fixCosts,
                      ProfitRatio, Discount);
                 double result = calculator.PriceCalculation(out double package2, out double package3);
-                ViewBag.package1 = Math.Round(result, 2);
-                ViewBag.package2 = Math.Round(package2, 2);
-                ViewBag.package3 = Math.Round(package3, 2);
-                return View("_PackagesSelection");
+                ViewBag.package1 = Math.Round(result, 2) + "€";
+                ViewBag.package2 = Math.Round(package2, 2) + "€";
+                ViewBag.package3 = Math.Round(package3, 2) + "€";             
+                return View("CalculationPage", CalculationPageData());
             }
             else
             {
-                CalculationPage();
-                return RedirectToAction("CalculationPage");
+                return View("CalculationPage", CalculationPageData());
             }
         }
 
