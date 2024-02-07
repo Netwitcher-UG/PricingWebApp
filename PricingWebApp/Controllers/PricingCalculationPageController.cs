@@ -67,6 +67,8 @@ namespace PricingWebApp.Controllers
         [HttpGet]
         public IActionResult CalculationPage()
         {
+            ViewData["ProfitRatio"] = 50;
+            ViewData["Discount"] = 15;
             return View(CalculationPageData());
         }
         [HttpPost]
@@ -86,7 +88,9 @@ namespace PricingWebApp.Controllers
                 double result = calculator.PriceCalculation(out double package2, out double package3);
                 ViewBag.package1 = Math.Round(result, 2) + "€";
                 ViewBag.package2 = Math.Round(package2, 2) + "€";
-                ViewBag.package3 = Math.Round(package3, 2) + "€";             
+                ViewBag.package3 = Math.Round(package3, 2) + "€";
+                ViewData["ProfitRatio"] = ProfitRatio;
+                ViewData["Discount"] = Discount;
                 return View("CalculationPage", CalculationPageData());
             }
             else

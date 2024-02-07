@@ -89,13 +89,14 @@
             const myFeild2Id = "myServiceInput2_" + rowId;
             const myFeild1 = document.getElementById(myFeild1Id);
             const myFeild2 = document.getElementById(myFeild2Id);
-            if ((myFeild2.value == "" || myFeild2.value == null) && myFeild2.blur) { myFeild2.value = 1 };
+            if (input.id == "myServiceInput1_" + rowId){
+                if (myFeild2.value == "" || myFeild2.value == null) { myFeild2.value = 1 };
+            }
             if (myFeild1.value.length > 6) { myFeild1.value = 999999; }
             if (myFeild2.value.length > 4) { myFeild2.value = 9999; }
             myFeild1.addEventListener("focus", function () { this.select(); });
             myFeild2.addEventListener("focus", function () { this.select(); });
             const spanElement = document.getElementById(spanId);
-
             spanElement.textContent = EuroSignalService(myFeild1.value * myFeild2.value);
         });
     });
