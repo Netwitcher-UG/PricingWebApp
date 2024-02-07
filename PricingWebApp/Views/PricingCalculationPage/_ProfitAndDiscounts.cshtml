@@ -15,10 +15,10 @@
         <tbody id="ProfitAndDiscountsfeilds">
             <tr>
                 <td>
-                    <input type="number" class="form-control PricingCalculationPageInputs" asp-for="ProfitRatio" id="myProfitRatio" value="50"  min="0" />
+                    <input type="number" class="form-control PricingCalculationPageInputs" asp-for="ProfitRatio" id="myProfitRatio" value="@ViewData["ProfitRatio"]" />
                 </td>
                 <td>
-                    <input type="number" class="form-control PricingCalculationPageInputs" asp-for="Discount" id="myDiscount" value="15" min="0" />
+                    <input type="number" class="form-control PricingCalculationPageInputs" asp-for="Discount" id="myDiscount" value="@ViewData["Discount"]" />
                 </td>
 
             </tr>
@@ -39,11 +39,12 @@
         field.style.width = "100px";
 
     });
-    
-        
    
     function ProfitRatio_Discount_input() {
         this.value = this.value.length > 4 ? 9999 : this.value;
+        if (this.value < 0) {
+            this.value = "";
+        }
     }
 
 
