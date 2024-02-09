@@ -3,9 +3,9 @@
 <div class="modal fade" id="EditOne-@Model.Id" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header text-white" style="background-color: #462746;">
+            <div class="modal-header text-white" style="background-color: #180344;">
                 <h5 class="modal-title">Edit Employee</h5>
-                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" onclick="clearAllErrMsgEdit()">
+                <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" onclick="clearAllErrMsgEditEmployeeCancele()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -48,10 +48,10 @@
                     <br>
                     <div class="modal-footer justify-content-between">
                             <button type="button" class="btn text-white btn-danger" style="width: 80px;"
-                                    data-dismiss="modal" onclick="clearAllErrMsgEdit()">
+                                    data-dismiss="modal" onclick="clearAllErrMsgEditEmployeeCancele()">
                                 Cancel
                             </button>
-                    <button type="submit" class="btn text-white btn-primary" style="width:80px;" onclick="return isEmptyFieldsEdit()">Update</button>
+                    <button type="submit" class="btn text-white btn-primary" style="width:80px;" onclick="return isEmptyFieldsEmployeeEdit()">Update</button>
                 </div>
               </div>
             </form>
@@ -61,57 +61,3 @@
 </div>
 
 
-
-@* @model PricingWebApp.Models.Employees
-
-@{
-    ViewData["Title"] = "Edit";
-}
-
-<h4>Employee</h4>
-<hr />
-
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="EditEmployee">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PhoneNo" class="control-label"></label>
-                <input asp-for="PhoneNo" class="form-control" />
-                <span asp-validation-for="PhoneNo" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HourRate" class="control-label"></label>
-                <input asp-for="HourRate" class="form-control" />
-                <span asp-validation-for="HourRate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
-
-<div>
-    <a asp-action="EmployeesTable">Back to List</a>
-</div>
-
-@* @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-} *@ 

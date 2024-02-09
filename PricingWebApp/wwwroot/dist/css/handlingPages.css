@@ -15,14 +15,25 @@ body {
     background-color: #edcb03;
     border-color: #edcb03;
     box-shadow: none;
+    border: #edcb03;
 }
-
-    .btn-Edit:hover {
-        color: #fff;
-        background-color: #ffd905;
-        border-color: #ffd905;
-    }
-
+.btn-Edit:hover {
+    color: #fff;
+    background-color: #ffd905;
+    border-color: #ffd905;
+}
+.btn-Details {
+    color: #fff;
+    background-color: #279eed;
+    border-color: #edcb03;
+    box-shadow: none;
+    border: #279eed;
+}
+.btn-Details:hover {
+    color: #fff;
+    background-color: #1095e8;
+    border-color: #ffd905;
+}
 @media (max-width: 768px) {
     .animation__shake {
         width: 30%;
