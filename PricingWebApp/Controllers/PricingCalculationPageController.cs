@@ -67,6 +67,9 @@ namespace PricingWebApp.Controllers
         [HttpGet]
         public IActionResult CalculationPage()
         {
+            ViewBag.package1 = 0 + "€";
+            ViewBag.package2 = 0 + "€";
+            ViewBag.package3 = 0 + "€";
             ViewData["ProfitRatio"] = 50;
             ViewData["Discount"] = 15;
             return View(CalculationPageData());

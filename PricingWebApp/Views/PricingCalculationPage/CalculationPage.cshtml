@@ -20,7 +20,7 @@
             </div>
         </div>
         <br />
-        <div class=" d-flex justify-content-spacebetween " id="myMainPagePricingCalculation" style="width:100%; display:flex;justify-content: space-between;">
+        <div class=" d-flex justify-content-spacebetween " id="myMainPagePricingCalculation" style="width:100%; display:flex;justify-content: space-between;flex-wrap: wrap;">
             <partial name="_EmployeesSelection" />
             <partial name="_ServicesSelection" />
         </div>
@@ -35,7 +35,9 @@
 
 
 <script>
-    window.addEventListener('resize', function () {
+    window.addEventListener('resize', sizeMyCards);
+    window.addEventListener('load', sizeMyCards);
+    function sizeMyCards() {
         const mediaQuery = window.matchMedia('(max-width: 1200px)');
 
         if (mediaQuery.matches) {
@@ -47,7 +49,7 @@
                 card.style.width = '48%';
             });
         }
-    });
+    }
     const myPriceCalculationTitleField = document.querySelector("#myPriceCalculationTitle");
 
     myPriceCalculationTitleField.addEventListener("focus", () => field.select());
