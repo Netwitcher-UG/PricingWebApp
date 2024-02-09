@@ -9,7 +9,10 @@
 body {
     font-family: Raleway !important;
 }
+.my-btns{
+    width:85px !important;
 
+}
 .btn-Edit {
     color: #fff;
     background-color: #edcb03;
@@ -23,16 +26,16 @@ body {
     border-color: #ffd905;
 }
 .btn-Details {
-    color: #fff;
-    background-color: #279eed;
-    border-color: #edcb03;
-    box-shadow: none;
-    border: #279eed;
+    color: #fff !important;
+    background-color: #279eed !important;
+    border-color: #edcb03 !important;
+    box-shadow: none !important;
+    border: #279eed !important;
 }
 .btn-Details:hover {
-    color: #fff;
-    background-color: #1095e8;
-    border-color: #ffd905;
+    color: #fff !important;
+    background-color: #1095e8 !important;
+    border-color: #ffd905 !important;
 }
 @media (max-width: 768px) {
     .animation__shake {
