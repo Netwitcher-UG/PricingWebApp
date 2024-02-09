@@ -2,7 +2,7 @@
 @model LoginModel
 
 @{
-    ViewData["Title"] = "Log in";
+
 }
 
 <!DOCTYPE html>
@@ -11,12 +11,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewData["Title"]</title>
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
     <style>
         body {
-            background-color: #f8f9fa;
+            background-color: white;
             font-family: 'Arial', sans-serif;
         }
 
@@ -25,6 +25,7 @@
             align-items: center;
             justify-content: center;
             height: 100vh;
+            background-color: white;
         }
 
         .login-box {
@@ -32,20 +33,21 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: 100vh;
+         
+            background-color: white;
         }
 
         .login-logo a {
-            color:dimgrey;
+            color: dimgrey;
             font-size: 2rem;
             font-weight: bold;
         }
 
         .card {
-            border: none;
-            width: 460px; 
-            height: 380px; 
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border: 10px;
+            width: 460px;
+            height: 390px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
         }
 
         .login-card-body {
@@ -54,8 +56,8 @@
 
         .input-group-prepend .input-group-text {
             background-color: #f8f9fa;
-            border: 1px solid #ced4da; 
-            border-radius: 0.25rem; 
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
         }
 
         .btn-primary {
@@ -82,7 +84,7 @@
         <div class="login-box">
             <div class="login-logo">
                 <div class="login-logo">
-                    <img src="/images/logo1.png" alt="Logo" class="img-fluid" style="width:320px; height: 100px;" />
+                    <img src="/images/logo2.png" alt="Logo" class="img-fluid" style="width:150px; height: 100px;" />
                 </div>
 
             </div>
@@ -111,6 +113,8 @@
                                 </div>
                             </div>
                         </div>
+                        
+                        <p class="login-box-msg">     </p>
 
                         <div class="row">
                             <div class="col-8">
@@ -131,8 +135,9 @@
                             <p class="mb-1">
                                 <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
                             </p>
+                          
+                          
 
-                        
                         </div>
                     </form>
 
@@ -148,19 +153,19 @@
                                     </button>
                                 }
                             </div>
-                           
+
                         </form>
+                         
                     }
 
-                    
+
                 </div>
             </div>
         </div>
-        @* <div class="login-logo">
-            <img src="/images/logo1.png" alt="Logo" class="img-fluid" style="width: 180px; height: 50px;" />
-        </div> *@
+        <div class="login-logo">
+            <img src="/images/logo1.png" alt="Logo" class="img-fluid" style="width:200px; height: 60px;" />
+        </div>
     </div>
-  
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
