@@ -17,7 +17,7 @@ namespace PricingWebApp.Controllers
    //     [Authorize(Roles = "Admin")]
         public async Task<IActionResult> FixCostsTable()
         {
-            
+
             try
             {
                 IEnumerable<FixCosts> fixCosts = await _context.FixCosts.ToListAsync();
@@ -31,7 +31,7 @@ namespace PricingWebApp.Controllers
 
 
         //=============== new fix cost =============
-       
+
 
         [HttpPost, ActionName("_NewFixCost")]
         [ValidateAntiForgeryToken]
@@ -41,7 +41,7 @@ namespace PricingWebApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    
+
                     _context.FixCosts.Add(fixcost);
                     await _context.SaveChangesAsync();
                     TempData["Successaddnewfixcost"] = "Success";
@@ -49,7 +49,7 @@ namespace PricingWebApp.Controllers
                 }
                 else
                 {
-                   
+
                     if (fixcost.Title != null) { ViewBag.FixCostName = fixcost.Title; }
                     ViewBag.monthlyCost = fixcost.MonthlyCost;
                     TempData["Filseaddnewfixcost"] = "err";
@@ -63,7 +63,7 @@ namespace PricingWebApp.Controllers
             }
         }
         //================ edit fix cost  ==============
-     
+
         [HttpPost, ActionName("_EditFixCost")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditFixCost(FixCosts fixcost)
@@ -91,7 +91,7 @@ namespace PricingWebApp.Controllers
 
         }
         //============== delete fix cost =============
-    
+
 
         [HttpPost, ActionName("_DeleteFixCost")]
         [ValidateAntiForgeryToken]

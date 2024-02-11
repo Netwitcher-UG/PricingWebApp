@@ -7,7 +7,6 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-
                 @if (Model.Any())
                 {
                     <div class="card">
@@ -44,14 +43,14 @@
                                                 <td>
                                                     <a data-url='@Url.Action($"_EditService/{service.Id}")'
                                            id="editservice+@service.Id" data-toggle="modal"
-                                           data-target='#EditService-@service.Id' class="btn btn-success text-center " onclick="KnowMyEditServiceBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
+                                           data-target='#EditService-@service.Id' class="btn btn-Edit text-center " onclick="KnowMyEditServiceBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
                                                     @await Html.PartialAsync("_EditService", service)
                                                 </td>
 
                                                 <td>
                                                     <a data-url='@Url.Action($"_DeleteService/{service.Id}")'
-                                                       id="deleteservice+@service.Id" data-toggle="modal"
-                                                       data-target='#DeleteService-@service.Id' class="btn btn-danger text-left"><i class="bi bi-trash"></i> Delete</a>
+                                           id="deleteservice+@service.Id" data-toggle="modal"
+                                           data-target='#DeleteService-@service.Id' class="btn btn-danger text-left"><i class="bi bi-trash"></i> Delete</a>
                                                     @await Html.PartialAsync("_DeleteService", service)
                                                 </td>
 
@@ -80,7 +79,7 @@
                 {
                     <div class=" ">
                         <a id="myBtnNewService" data-toggle="modal" data-target="#addService"
-                           class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Service</a>
+                       class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Service</a>
                         @await Html.PartialAsync("_NewService", new Services())
                         <p class="font-weight-bold text-center mt-5">No service . Let's add a service ...</p>
                     </div>
@@ -100,7 +99,7 @@
 </aside>
 
 <script>
-    
+
     const formNewService = document.querySelector('form[name="NewService"]');
     const ServiceTitleInput = formNewService.querySelector('input[name="Title"]');
     const ServiceTitleInputerr = formNewService.querySelector('span[data-valmsg-for="Title"]');
@@ -111,7 +110,7 @@
             return false;
         } else {
             ServiceTitleInputerr.textContent = "";
-                return true;
+            return true;
         };
     }
     function clearAllErrMsgService() {
@@ -142,7 +141,7 @@
         const titleInputE = formServiceE.querySelector('input[name="Title"]');
         const titleInputerrE = formServiceE.querySelector('span[data-valmsg-for="Title"]');
         titleInputE.value = myServiseName;
-        titleInputerrE.textContent = "";       
+        titleInputerrE.textContent = "";
     }
 
     function checksaved2(title, doneOrNot) {

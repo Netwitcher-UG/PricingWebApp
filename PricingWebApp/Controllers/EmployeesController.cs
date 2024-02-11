@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PricingWebApp.Data;
-using PricingWebApp.Data.Migrations;
 using PricingWebApp.Models;
 
 namespace PricingWebApp.Controllers
@@ -31,63 +30,30 @@ namespace PricingWebApp.Controllers
         }
 
         //=============== Employees/Create =============
-        [HttpGet]
-        [Authorize]
-        public ViewResult NewEmployee()
-        {
-            return View();
-        }
+        
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> NewEmployee(Employees employee)
         {
             if (ModelState.IsValid)
             {
                 _context.Employees.Add(employee);
                 await _context.SaveChangesAsync();
+                TempData["SuccessaddnewEmployee"] = "success";
                 return RedirectToAction("EmployeesTable");
             }
             else
             {
-                return View();
+                TempData["FilseaddnewEmployee"] = "err";
+                IEnumerable<Employees> employees = _context.Employees.ToList();
+                return View("EmployeesTable", employees);
             }
         }
 
-        // GET: Employees/Details
-        public async Task<IActionResult> DetailsEmployee(int? id)
-        {
-            if (id == null || _context.Employees == null)
-            {
-                return NotFound();
-            }
+        
 
-            var employees = await _context.Employees
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (employees == null)
-            {
-                return NotFound();
-            }
-
-            return View(employees);
-        }
-
-        // GET: Employees/Edit
-        public async Task<IActionResult> EditEmployee(int? id)
-        {
-            if (id == null || _context.Employees == null)
-            {
-            return NotFound();
-            }
-
-            var employees = await _context.Employees.FindAsync(id);
-            if (employees == null)
-            {
-            return NotFound();
-            }
-            return View(employees);
-        }
-
-        // POST: Employees/Edit
+        //============ Employees/Edit ===========
         [HttpPost, ActionName("EditEmployee")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EditFixCost(int? id, Employees employees)
@@ -103,6 +69,7 @@ namespace PricingWebApp.Controllers
                 {
                     _context.Update(employees);
                     await _context.SaveChangesAsync();
+                    TempData["SuccesseditEmployee"] = "success";
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -117,28 +84,11 @@ namespace PricingWebApp.Controllers
                 }
                 return RedirectToAction(nameof(EmployeesTable));
             }
+            TempData["FilseditEmployee"] = "err";
             return View(employees);
         }
 
-        // GET: Employees/Delete
-        public async Task<IActionResult> DeleteEmployee(int? id)
-        {
-            if (id == null || _context.Employees == null)
-            {
-                return NotFound();
-            }
-
-            var employees = await _context.Employees
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (employees == null)
-            {
-                return NotFound();
-            }
-
-            return View(employees);
-        }
-
-        // POST: Employees/Delete
+        // =========== Employees/Delete ===========
         [HttpPost, ActionName("DeleteEmployee")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -154,6 +104,7 @@ namespace PricingWebApp.Controllers
             }
 
             await _context.SaveChangesAsync();
+            TempData["SuccessdeleteEmployee"] = "success";
             return RedirectToAction(nameof(EmployeesTable));
         }
 

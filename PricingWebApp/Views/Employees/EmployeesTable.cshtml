@@ -37,7 +37,7 @@
                                         <th>Delete</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody id="myEmployeesTbody">
                                     @foreach (var employee in Model)
                                     {
                                         try
@@ -52,28 +52,28 @@
                                                 <td width="17%">
                                                     @employee.PhoneNo
                                                 </td>
-                                                <td width="17%">
+                                                <td width="15%">
                                                     @employee.Email
                                                 </td>
-                                                <td width="12%">
-                                                    @employee.HourRate €
+                                                <td width="12%" class="myEmployeesHourRateTds">
+                                                    @employee.HourRate
                                                 </td>
 
                                                 <td width="10%">
                                                     <a data-url='@Url.Action($"EditEmployee/{employee.Id}")'
                                            id="edit+@employee.Id" data-toggle="modal"
-                                           data-target='#EditOne-@employee.Id' class="btn btn-success" onclick="KnowMyEditBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
+                                           data-target='#EditOne-@employee.Id' class="btn btn-Edit text-center" onclick="KnowMyEmployeeEditBoxID(this.id)"><i class="bi bi-eye"></i> Edit</a>
                                                     @await Html.PartialAsync("EditEmployee", employee)
                                                 </td>
 
                                                 <td width="10%">
                                                     <a data-url='@Url.Action($"DetailsEmployee/{employee.Id}")'
                                                        id="details+@employee.Id" data-toggle="modal"
-                                                       data-target='#DetailsOne-@employee.Id' class="btn btn-secondary text-center"><i class="fa fa-eye"></i> View</a>
+                                           data-target='#DetailsOne-@employee.Id' class="btn btn-Details text-center" ><i class="fa fa-eye"></i> View</a>
                                                     @await Html.PartialAsync("DetailsEmployee", employee)
                                                 </td>
 
-                                                <td width="10%">
+                                                <td width="12%">
                                                     <a data-url='@Url.Action($"DeleteEmployee/{employee.Id}")'
                                                        id="delete+@employee.Id" data-toggle="modal"
                                                        data-target='#DeleteOne-@employee.Id' class="btn btn-danger text-left"><i class="bi bi-trash"></i> Delete</a>
@@ -108,8 +108,9 @@
                 else
                 {
                     <div class=" ">
-                        <a asp-action="NewEmployee"
-                           class="" style="text-decoration: none;cursor: pointer; "><i class="bi bi-plus"></i> Add New Employee</a>
+                        <a id="mybtn" data-toggle="modal" data-target="#addone"
+                       class="" style="text-decoration: none;cursor: pointer;"><i class="bi bi-plus"></i> Add New Employee</a>
+                        @await Html.PartialAsync("NewEmployee", new Employees())
                         <p class="font-weight-bold text-center mt-5">No employees . Let's add an employee ...</p>
                     </div>
                 }
@@ -127,4 +128,230 @@
     <!-- Control sidebar content goes here -->
 </aside>
 
+<script>
+    
+    function changeMyEmployeesHourRate() {
+        const myTbody = document.querySelector('#myEmployeesTbody');
+        const myMonthlyCost = myTbody.querySelectorAll(".myEmployeesHourRateTds");
+        myMonthlyCost.forEach(function (elm) {
+            const x = new Intl.NumberFormat('de-DE', {
+                style: 'currency',
+                currency: 'EUR',
+            }).formatToParts(elm.textContent).map(
+                p => p.type != 'literal' && p.type != 'currency' ? p.value : ''
+            ).join('')
+            elm.textContent = x + " â‚¬";
+        });
+    }
+    window.addEventListener('load', changeMyEmployeesHourRate);
 
+
+    var formEmployeeEdit;
+    const myEmployeeData = [];
+    var myEmployeeFields = {};
+    function KnowMyEmployeeEditBoxID(x) {
+        myEditEmployeeID = x.slice(5);
+        formEmployeeEdit = document.querySelector('form[name="EditEmployee-' + myEditEmployeeID + '"]');
+        myEmployeeData.push(formEmployeeEdit.querySelector('input[name="FirstName"]').value);
+        myEmployeeData.push(formEmployeeEdit.querySelector('input[name="LastName"]').value);
+        myEmployeeData.push(formEmployeeEdit.querySelector('input[name="Email"]').value);
+        myEmployeeData.push(formEmployeeEdit.querySelector('input[name="PhoneNo"]').value);
+        myEmployeeData.push(formEmployeeEdit.querySelector('input[name="HourRate"]').value);
+        myEmployeeFields.firstNameInput = formEmployeeEdit.querySelector('input[name="FirstName"]');
+        myEmployeeFields.lastNameInput = formEmployeeEdit.querySelector('input[name="LastName"]');
+        myEmployeeFields.emailInput = formEmployeeEdit.querySelector('input[name="Email"]');
+        myEmployeeFields.phoneNoInput = formEmployeeEdit.querySelector('input[name="PhoneNo"]');
+        myEmployeeFields.hourRateInput = formEmployeeEdit.querySelector('input[name="HourRate"]');
+        myEmployeeFields.firstNameInputerr = formEmployeeEdit.querySelector('span[data-valmsg-for="FirstName"]');
+        myEmployeeFields.lastNameInputerr = formEmployeeEdit.querySelector('span[data-valmsg-for="LastName"]');
+        myEmployeeFields.emailInputerr = formEmployeeEdit.querySelector('span[data-valmsg-for="Email"]');
+        myEmployeeFields.phoneNoInputerr = formEmployeeEdit.querySelector('span[data-valmsg-for="PhoneNo"]');
+        myEmployeeFields.hourRateInputerr = formEmployeeEdit.querySelector('span[data-valmsg-for="HourRate"]');
+    }
+
+    function isEmptyFieldsEmployeeEdit() {
+        
+        if (myEmployeeFields.firstNameInput.value == "") {
+            clearAllErrMsgEditEmployee();
+            myEmployeeFields.firstNameInputerr.textContent = "You must put a first name for the employee!!";
+            return false;
+        } else if (myEmployeeFields.lastNameInput.value == "") {
+            clearAllErrMsgEditEmployee();
+            myEmployeeFields.lastNameInputerr.textContent = "You must put a last name for the employee!!";
+            return false;
+        } else if (myEmployeeFields.emailInput.value == "") {
+            clearAllErrMsgEditEmployee();
+            myEmployeeFields.emailInputerr.textContent = "You must put an email for the employee!!";
+            return false;
+        } else if (myEmployeeFields.phoneNoInput.value == "") {
+            clearAllErrMsgEditEmployee();
+            myEmployeeFields.phoneNoInputerr.textContent = "You must put a phone number for the employee!!";
+            return false;
+        } else if (myEmployeeFields.hourRateInput.value == null || myEmployeeFields.hourRateInput.value == 0) {
+            clearAllErrMsgEditEmployee();
+            myEmployeeFields.hourRateInputerr.textContent = "You must put an hour rate for the employee!!";
+            return false;
+        }
+        else {
+            clearAllErrMsgEditEmployee();
+            return true;
+        }
+    }
+    function clearAllErrMsgEditEmployee() {
+        myEmployeeFields.firstNameInputerr.textContent = "";
+        myEmployeeFields.lastNameInputerr.textContent = "";
+        myEmployeeFields.emailInputerr.textContent = "";
+        myEmployeeFields.phoneNoInputerr.textContent = "";
+        myEmployeeFields.hourRateInputerr.textContent = "";
+    }
+    function clearAllErrMsgEditEmployeeCancele() {
+        myEmployeeFields.firstNameInput.value = myEmployeeData[0];
+        myEmployeeFields.lastNameInput.value = myEmployeeData[1];
+        myEmployeeFields.emailInput.value = myEmployeeData[2];
+        myEmployeeFields.phoneNoInput.value = myEmployeeData[3];
+        myEmployeeFields.hourRateInput.value = myEmployeeData[4];
+        myEmployeeFields.firstNameInputerr.textContent = "";
+        myEmployeeFields.lastNameInputerr.textContent = "";
+        myEmployeeFields.emailInputerr.textContent = "";
+        myEmployeeFields.phoneNoInputerr.textContent = "";
+        myEmployeeFields.hourRateInputerr.textContent = "";
+    }
+
+
+
+    function checksaved(title, n) {
+        setTimeout(function () {
+            if (n == true) { toastr.success(title); }
+            else { toastr.error(title) }
+        }, 1000);
+    }
+</script>
+
+@if (TempData["SuccessaddnewEmployee"] != null)
+{
+    <script>checksaved('Added successfully', true);</script>
+}
+@if (TempData["FilseaddnewEmployee"] != null)
+{
+    <script>checksaved('Add failed', false)</script>
+}
+@if (TempData["SuccesseditEmployee"] != null)
+{
+    <script>checksaved('Update successfully', true);</script>
+}
+@if (TempData["FilseditEmployee"] != null)
+{
+    <script>checksaved('Update failed', false)</script>
+}
+@if (TempData["SuccessdeleteEmployee"] != null)
+{
+    <script>checksaved('Delete successfully', true)</script>
+}
+@if (TempData["FilsdeleteEmployee"] != null)
+{
+    <script>checksaved('Delete failed relode please', false)</script>
+}
+
+<script>
+     function countCulomnEmployee() {
+        const myTbody = document.querySelector('#myEmployeesTbody');
+        let visibleColumnsCount = 0;
+        const firstRow = myTbody.querySelectorAll('tr');
+        const tdsInFirstTr = firstRow[0].querySelectorAll('td');
+        tdsInFirstTr.forEach(function (element) {
+            if (element.style.display === 'none') { visibleColumnsCount++; }
+        });
+        return visibleColumnsCount;
+    }
+    
+    window.addEventListener('load', changMyEmployeesModalID);
+    window.addEventListener('resize', changMyEmployeesModalID);
+
+    function changMyEmployeesModalID() {
+        
+        const myTbody = document.querySelector('#myEmployeesTbody');
+        const elements = myTbody.querySelectorAll('*');
+
+        const myTrShowMore = myTbody.querySelectorAll("tr.dt-hasChild");
+        const firstChildElements = [];
+        for (const trElement of myTrShowMore) {
+            firstChildElements.push(trElement.querySelector("td"));
+        }
+        if (firstChildElements.length == 1) {
+            firstChildElements[0].click();
+        } else if (firstChildElements.length > 1) {
+            location.reload();
+        }
+
+        setTimeout(function () {
+            elements.forEach(function (element) {
+                if (countCulomnEmployee() == 1 && element.id) {
+                    if (element.id.slice(0, 6) === 'Delete') {
+                        const index = element.id.indexOf("not");
+                        if (index !== -1) { return; }
+                        element.id = "not" + element.id;
+                    }
+                    if (element.id.includes("notDetails")){
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                    if (element.id.includes("notEdit")) {
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                } else if (countCulomnEmployee() == 2 && element.id) {
+                    if (element.id.includes("notDetails") && element.id.includes("notEdit")){
+
+                    }else{
+                        if (element.id.includes("notDetails")) {
+                        } else if (element.id.slice(0, 7) === 'Details') {
+                            const index = element.id.indexOf("not");
+                            if (index !== -1) { return; }
+                            element.id = "not" + element.id;
+                        }
+                        if (element.id.includes("notEdit")) {
+                        } else if (element.id.slice(0, 4) === 'Edit') {
+                            const index = element.id.indexOf("not");
+                            if (index !== -1) { return; }
+                            element.id = "not" + element.id;
+                        }
+                    }
+                    if (element.id.includes("notEdit")) {
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                } else if (countCulomnEmployee() >= 3 && element.id) {
+                    if (element.id.includes("notDelete") && element.id.includes("notDetails") && element.id.includes("notEdit")) {
+
+                    } else {
+                        if (element.id.includes("notDelete")) {
+                        } else if (element.id.slice(0, 6) === 'Delete') {
+                            const index = element.id.indexOf("not");
+                            if (index !== -1) { return; }
+                            element.id = "not" + element.id;
+                        }
+                        if (element.id.includes("notDetails")) {
+                        } else if (element.id.slice(0, 7) === 'Details') {
+                            const index = element.id.indexOf("not");
+                            if (index !== -1) { return; }
+                            element.id = "not" + element.id;
+                        }
+                        if (element.id.includes("notEdit")) {
+                        } else if (element.id.slice(0, 4) === 'Edit') {
+                            const index = element.id.indexOf("not");
+                            if (index !== -1) { return; }
+                            element.id = "not" + element.id;
+                        }
+                    }
+                } else if (countCulomnEmployee() == 0 && element.id && element.id.includes("not")) {
+                    if (element.id.includes("notDelete")) {
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                    if (element.id.includes("notDetails")) {
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                    if (element.id.includes("notEdit")) {
+                        element.id = element.id.slice(3, element.id.length);
+                    }
+                }
+            });
+        }, 400);
+    }
+</script>

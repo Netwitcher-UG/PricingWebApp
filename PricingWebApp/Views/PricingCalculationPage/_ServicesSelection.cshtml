@@ -1,0 +1,131 @@
+﻿@using static PricingWebApp.Controllers.PricingCalculationPageController
+@model MyPagesModels
+
+
+
+
+<div class="card " style="width:49%" id="pricingServicesCard">
+    <div class="card-header">
+        <h3 class="card-title">Services Selection</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table class="table table-bordered text-center" id="pricingServicesTable">
+
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th> Name</th>
+                    <th>Service Rate</th>
+                    <th> Count</th>
+                    <th style="width:25%">Sum</th>
+                </tr>
+            </thead>
+            <tbody id="pricingServices">
+                @for (int i = 0; i < Model.MyServicesModel?.Count(); i++)
+                {
+                    <tr>
+                        <td>
+                            <div class="form-check">
+                                <input class="form-check-input" type="checkbox" asp-for="MyServicesRows[i].IsChecked" id="myServiceCheckbox_@Model.MyServicesModel[i].Id">
+                            </div>
+                        </td>
+                        <td>
+                            <label for="myServiceCheckbox_@Model.MyServicesModel[i].Id" style="user-select :none"> @Model.MyServicesModel[i].Title </label>
+                        </td>
+                        <td>
+                            <input type="number" asp-for="MyServicesRows[i].ServiceRate" class="form-control form-control-sm myInput" id="myServiceInput1_@Model.MyServicesModel[i].Id"  min="1">
+                        </td>
+                        <td>
+                            <input type="number" asp-for="MyServicesRows[i].ServiceCount" class="form-control form-control-sm myInput" id="myServiceInput2_@Model.MyServicesModel[i].Id" min="1">
+                        </td>
+                        <td>
+                            <input type="hidden" asp-for="MyServicesRows[i].Id" value="@Model.MyServicesModel[i].Id">
+
+                            <span id="Serviceresult_@Model.MyServicesModel[i].Id"></span>
+                        </td>
+
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+<script>
+    window.addEventListener('load', lockMyFieldService);
+    document.getElementById("pricingServices").addEventListener("change", lockMyFieldService);
+    function lockMyFieldService() {
+        const checkboxes = document.querySelectorAll("#pricingServices input[type='checkbox']");
+
+        checkboxes.forEach(function (checkbox) {
+            const numberInputs = checkbox.closest("tr").querySelectorAll("input[type='number']");
+
+            if (checkbox.checked) {
+                numberInputs.forEach(function (input) {
+                    input.disabled = false;
+                });
+            } else {
+                numberInputs.forEach(function (input) {
+                    input.disabled = true;
+                    input.value = "";
+
+                    const spanId = "Serviceresult_" + input.closest("tr").querySelector("input[type='hidden']").value;
+                    const spanElement = document.getElementById(spanId);
+                    spanElement.textContent = "";
+                });
+            }
+        });
+    }
+
+    const myFeildsService = document.querySelectorAll('#pricingServices tr td input[type="number"]');
+
+    myFeildsService.forEach(input => {
+        input.addEventListener("input", function () {
+            const rowId = this.closest("tr").querySelector("input[type='hidden']").value;
+            const spanId = "Serviceresult_" + rowId;
+            const myFeild1Id = "myServiceInput1_" + rowId;
+            const myFeild2Id = "myServiceInput2_" + rowId;
+            const myFeild1 = document.getElementById(myFeild1Id);
+            const myFeild2 = document.getElementById(myFeild2Id);
+            if (input.id == "myServiceInput1_" + rowId){
+                if (myFeild2.value == "" || myFeild2.value == null) { myFeild2.value = 1 };
+            }
+            if (myFeild1.value.length > 6) { myFeild1.value = 999999; }
+            if (myFeild2.value.length > 4) { myFeild2.value = 9999; }
+            myFeild1.addEventListener("focus", function () { this.select(); });
+            myFeild2.addEventListener("focus", function () { this.select(); });
+            const spanElement = document.getElementById(spanId);
+            spanElement.textContent = EuroSignalService(myFeild1.value * myFeild2.value);
+        });
+    });
+    const myTrService = document.querySelectorAll('#pricingServices tr');
+
+    myTrService.forEach(input => {
+        const rowId = input.querySelector("td input[type='hidden']").value;
+        const myFeild1 = document.getElementById("myServiceInput1_" + rowId);
+        const myFeild2 = document.getElementById("myServiceInput2_" + rowId);
+        const spanElement = document.getElementById("Serviceresult_" + rowId);
+        myFeild1.addEventListener("focus", function () { this.select(); });
+        myFeild2.addEventListener("focus", function () { this.select(); });
+        spanElement.textContent = EuroSignalService(myFeild1.value * myFeild2.value);
+    }
+    );
+
+
+    function EuroSignalService(elm) {
+        const x = new Intl.NumberFormat('de-DE', {
+            style: 'currency',
+            currency: 'EUR',
+        }).formatToParts(elm).map(
+            p => p.type != 'literal' && p.type != 'currency' ? p.value : ''
+        ).join('');
+        var y = x + "€"
+        return y;
+
+    }
+
+
+
+</script>

@@ -3,7 +3,7 @@
 <div class="modal fade" id="EditService-@Model.Id" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header text-white" style="background-color: #462746;">
+            <div class="modal-header text-white" style="background-color: #180344;">
                 <h5 class="modal-title">Edit Service</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" onclick="clearAllErrMsgEditService()">
                     <span aria-hidden="true">&times;</span>
@@ -11,7 +11,7 @@
             </div>
             <div class="modal-body">
                 <form method="post" asp-action="_EditService" name="EditService-@Model.Id">
-                    <input asp-for="Id" hidden id="" placeholder="x"/>
+                    <input asp-for="Id" hidden id="" placeholder="x" />
                     <div class="border p-3 bt-4">
                         <div class="mb-3">
                             <label asp-for="Title">Service Name</label>
@@ -20,11 +20,11 @@
                         </div>
                         <br>
                         <div class="modal-footer justify-content-between">
-                            <button type="button" class="btn text-white btn-danger" style="width: 80px;"
+                            <button type="button" class="btn text-white btn-danger" style="width: 100px;"
                                     data-dismiss="modal" onclick="clearAllErrMsgEditService()">
                                 Cancel
                             </button>
-                            <button type="submit" class="btn text-white btn-primary" style="width:80px;" onclick="return isEmptyFieldsEditService()">Update</button>
+                            <button type="submit" class="btn my-btns text-white btn-primary" style="width:100px;" onclick="return isEmptyFieldsEditService()">Update</button>
                         </div>
                     </div>
                 </form>

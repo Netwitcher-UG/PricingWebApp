@@ -1,0 +1,66 @@
+﻿@using static PricingWebApp.Controllers.PricingCalculationPageController
+@model MyPagesModels
+
+
+<div class="card" style="width:100%;background:#fff;" id="pricingServicesCard">
+    <table class="table table-bordered text-center" id="pricingServicesTable">
+
+        <thead>
+            <tr>
+                <th style="width:50%">Profit Ratio</th>
+                <th style="width:50%">Discount Percentage</th>
+
+            </tr>
+        </thead>
+        <tbody id="ProfitAndDiscountsfeilds">
+            <tr>
+                <td>
+                    <div class="input-group" style="width:250px;margin:auto;">
+                    <input type="number" class="form-control PricingCalculationPageInputs" asp-for="ProfitRatio" id="myProfitRatio" value="@ViewData["ProfitRatio"]" />
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        %
+                                    </span>
+                                </div>
+                            </div>
+                </td>
+                <td>
+                    <div class="input-group" style="width:250px;margin:auto;">
+                        <input type="number" class="form-control PricingCalculationPageInputs" asp-for="Discount" id="myDiscount" value="@ViewData["Discount"]" />
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">
+                                %
+                            </span>
+                        </div>
+                    </div>
+                </td>
+
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+
+    const ProfitAndDiscountsfeilds = document.querySelectorAll("#ProfitAndDiscountsfeilds input[type='number']");
+    ProfitAndDiscountsfeilds.forEach(field => {
+        field.addEventListener("focus", () => field.select());
+        field.addEventListener("input", ProfitRatio_Discount_input);
+        field.style.textAlign = "center";
+        field.style.paddingRight = "10px";
+        
+        field.style.width = "100px";
+
+    });
+   
+    function ProfitRatio_Discount_input() {
+        this.value = this.value.length > 4 ? 9999 : this.value;
+        if (this.value < 0) {
+            this.value = "";
+        }
+    }
+
+
+
+</script>

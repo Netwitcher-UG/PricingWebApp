@@ -1,0 +1,63 @@
+@using static PricingWebApp.Controllers.PricingCalculationPageController
+@model MyPagesModels
+@{
+    ViewData["Title"] = "Pricing Calculation Page";
+}
+<style>
+    .PricingCalculationPageInputs{
+        margin:auto;
+        display:inline;
+    }
+</style>
+
+<!-- Main content -->
+<section class="content">
+
+    <form method="post" asp-controller="PricingCalculationPage" asp-action="CalculationPage">
+        <div class="w-100">
+            <div class="w-50">
+                <input asp-for="MyTitle" style="width:200px;" class="form-control" id="myPriceCalculationTitle" placeholder="Project Title …" autocomplete="off" />
+            </div>
+        </div>
+        <br />
+        <div class=" d-flex justify-content-spacebetween " id="myMainPagePricingCalculation" style="width:100%; display:flex;justify-content: space-between;flex-wrap: wrap;">
+            <partial name="_EmployeesSelection" />
+            <partial name="_ServicesSelection" />
+        </div>
+        <partial name="_ProfitAndDiscounts" />
+        
+        <input type="submit" value="calculate price" class="btn btn-block btn-success btn-lg" style="width:300px;margin:50px auto;" />
+        <partial name="_PackagesSelection" />
+    </form>
+
+</section>
+
+
+
+<script>
+    window.addEventListener('resize', sizeMyCards);
+    window.addEventListener('load', sizeMyCards);
+    function sizeMyCards() {
+        const mediaQuery = window.matchMedia('(max-width: 1200px)');
+
+        if (mediaQuery.matches) {
+            document.querySelectorAll('#myMainPagePricingCalculation .card').forEach((card) => {
+                card.style.width = '100%';
+            });
+        } else {
+            document.querySelectorAll('#myMainPagePricingCalculation .card').forEach((card) => {
+                card.style.width = '48%';
+            });
+        }
+    }
+    const myPriceCalculationTitleField = document.querySelector("#myPriceCalculationTitle");
+
+    myPriceCalculationTitleField.addEventListener("focus", () => field.select());
+    myPriceCalculationTitleField.addEventListener("input", myPriceCalculationTitleField_input);
+
+    
+    
+    function myPriceCalculationTitleField_input() {
+        this.value = this.value.length > 20 ? this.value.substring(0, 20) : this.value;
+    }
+</script>

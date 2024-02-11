@@ -3,43 +3,43 @@
 <div class="modal fade" id="EditOne-@Model.Id" data-backdrop="static" data-keyboard="false">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header text-white" style="background-color: #462746;">
+            <div class="modal-header text-white" style="background-color: #180344;">
                 <h5 class="modal-title">Edit Fix Cost</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close" onclick="clearAllErrMsgEdit()">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-            <form method="post" asp-action="_EditFixCost" name="EditFixCost-@Model.Id">
-              <input asp-for="Id" hidden id="" placeholder="x" />
-                <div class="border p-3 bt-4">
-                    <div class="mb-3">
-                        <label asp-for="Title">Fix Cost Name</label>
-                        <input asp-for="Title" class="form-control" autocomplete="off">
-                        <span asp-validation-for="Title" class="text-danger"></span>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="MonthlyCost">monthly Cost</label>
-                        <div class="input-group">
-                            <input asp-for="MonthlyCost" class="form-control" autocomplete="off" min="0">
-                            <div class="input-group-prepend">
-                                <span class="input-group-text">
-                                    <i class="bi bi-currency-euro font-weight-bold"></i>
-                                </span>
-                            </div>
+                <form method="post" asp-action="_EditFixCost" name="EditFixCost-@Model.Id">
+                    <input asp-for="Id" hidden id="" placeholder="x" />
+                    <div class="border p-3 bt-4">
+                        <div class="mb-3">
+                            <label asp-for="Title">Fix Cost Name</label>
+                            <input asp-for="Title" class="form-control" autocomplete="off">
+                            <span asp-validation-for="Title" class="text-danger"></span>
                         </div>
-                        <span asp-validation-for="MonthlyCost" class="text-danger"></span>
-                    </div>
-                    <br>
-                    <div class="modal-footer justify-content-between">
+                        <div class="mb-3">
+                            <label asp-for="MonthlyCost">monthly Cost</label>
+                            <div class="input-group">
+                                <input asp-for="MonthlyCost" class="form-control" autocomplete="off" min="0">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">
+                                        <i class="bi bi-currency-euro font-weight-bold"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            <span asp-validation-for="MonthlyCost" class="text-danger"></span>
+                        </div>
+                        <br>
+                        <div class="modal-footer justify-content-between">
                             <button type="button" class="btn text-white btn-danger" style="width: 80px;"
                                     data-dismiss="modal" onclick="clearAllErrMsgEdit()">
                                 Cancel
                             </button>
-                    <button type="submit" class="btn text-white btn-primary" style="width:80px;" onclick="return isEmptyFieldsEdit()">Update</button>
-                </div>
-              </div>
-            </form>
+                            <button type="submit" class="btn my-btns text-white btn-primary" style="width:80px;" onclick="return isEmptyFieldsEdit()">Update</button>
+                        </div>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

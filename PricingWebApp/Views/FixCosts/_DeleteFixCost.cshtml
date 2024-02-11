@@ -3,41 +3,41 @@
 <div class="modal fade" id="DeleteOne-@Model.Id" aria-labelledby="DeleteOne-@Model.Id" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header text-white" style="background-color: #462746;">
+            <div class="modal-header text-white" style="background-color: #180344;">
                 <h5 class="modal-title">Delete Fix Cost</h5>
                 <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body">
-            <form method="post" asp-action="_DeleteFixCost">
-              <input asp-for="Id" hidden id="" placeholder="x" />
-                <div class="border p-3 bt-4">
-                    <div class="mb-3">
-                        <label asp-for="Title">Fix Cost Name :</label>
-                        <span class="">&nbsp   @Model.Title</span>
+                <form method="post" asp-action="_DeleteFixCost">
+                    <input asp-for="Id" hidden id="" placeholder="x" />
+                    <div class="border p-3 bt-4">
+                        <div class="mb-3">
+                            <label asp-for="Title">Fix Cost Name :</label>
+                            <span class="">&nbsp   @Model.Title</span>
 
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="MonthlyCost">monthly Cost :</label>
-                        <span class=""> &nbsp  @Model.MonthlyCost <i class="bi bi-currency-euro"></i></span>
-                    </div>
-                    <div class="mb-3">
-                        <label asp-for="LastUpdate">last Update :</label>
-                        <span class=""> &nbsp  @Model.LastUpdate.ToString("dd-MM-yyyy")</span>
-                    </div>
-                    <br>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="MonthlyCost">monthly Cost :</label>
+                            <span class=""> &nbsp  @Model.MonthlyCost <i class="bi bi-currency-euro"></i></span>
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LastUpdate">last Update :</label>
+                            <span class=""> &nbsp  @Model.LastUpdate.ToString("dd-MM-yyyy")</span>
+                        </div>
+                        <br>
                     </div>
                     <div class="modal-footer justify-content-between">
                         <button type="button" class="btn text-white btn-danger" style="width: 80px;"
                                 data-dismiss="modal">
-                                Cancel
+                            Cancel
                         </button>
-                        <button type="submit" class="btn text-white btn-primary" style="width:80px;">Delete</button>
-                    
+                        <button type="submit" class="btn my-btns text-white btn-primary" style="width:80px;">Delete</button>
+
                     </div>
-                
-            </form>
+
+                </form>
             </div>
         </div>
     </div>
