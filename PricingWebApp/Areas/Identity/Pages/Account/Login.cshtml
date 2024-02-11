@@ -1,0 +1,177 @@
+﻿@page
+@model LoginModel
+
+@{
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+        body {
+            background-color: white;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-page {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-color: white;
+        }
+
+        .login-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+         
+            background-color: white;
+        }
+
+        .login-logo a {
+            color: dimgrey;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .card {
+            border: 10px;
+            width: 460px;
+            height: 390px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .login-card-body {
+            padding: 30px;
+        }
+
+        .input-group-prepend .input-group-text {
+            background-color: #f8f9fa;
+            border: 1px solid #ced4da;
+            border-radius: 0.25rem;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            color: #fff;
+        }
+
+        .mt-3 a {
+            color: #007bff;
+        }
+
+        .logo-image {
+            width: 200px;
+            height: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-page">
+        <div class="login-box">
+            <div class="login-logo">
+                <div class="login-logo">
+                    <img src="/images/logo2.png" alt="Logo" class="img-fluid" style="width:150px; height: 100px;" />
+                </div>
+
+            </div>
+
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Sign in to start your session</p>
+
+                    <form id="account" method="post">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                        <div class="input-group mb-3">
+                            <input asp-for="Input.Email" class="form-control" placeholder="Email" autocomplete="username" aria-required="true" />
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <input asp-for="Input.Password" type="password" class="form-control" placeholder="Password" autocomplete="current-password" aria-required="true" />
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">
+                                    <span class="fas fa-lock"></span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <p class="login-box-msg">     </p>
+
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="icheck-primary">
+                                    <input class="form-check-input" asp-for="Input.RememberMe" />
+                                    <label class="form-check-label" for="inputRememberMe">
+                                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="col-4">
+                                <button id="login-submit" type="submit" class="btn btn-primary btn-block">Sign In</button>
+                            </div>
+                        </div>
+
+                        <div class="mt-3">
+                            <p class="mb-1">
+                                <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </p>
+                          
+                          
+
+                        </div>
+                    </form>
+
+                    @if ((Model.ExternalLogins?.Count ?? 0) > 0)
+                    {
+                        <p class="mt-3 mb-1">Or sign in with:</p>
+                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                            <div class="social-auth-links text-center">
+                                @foreach (var provider in Model.ExternalLogins!)
+                                {
+                                    <button type="submit" class="btn btn-block btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                        <i class="fab fa-@provider.Name"></i> @provider.DisplayName
+                                    </button>
+                                }
+                            </div>
+
+                        </form>
+                         
+                    }
+
+
+                </div>
+            </div>
+        </div>
+        <div class="login-logo">
+            <img src="/images/logo1.png" alt="Logo" class="img-fluid" style="width:200px; height: 60px;" />
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    @section Scripts {
+        <partial name="_ValidationScriptsPartial" />
+    }
+</body>
+
+</html>

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PricingWebApp.Data;
@@ -13,6 +14,7 @@ namespace PricingWebApp.Controllers
             _context = context;
         }
         //=============== fix costs table ============
+   //     [Authorize(Roles = "Admin")]
         public async Task<IActionResult> FixCostsTable()
         {
 

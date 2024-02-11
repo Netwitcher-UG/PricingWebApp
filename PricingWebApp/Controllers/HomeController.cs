@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using PricingWebApp.Models;
 using System.Diagnostics;
 
@@ -13,8 +14,11 @@ namespace PricingWebApp.Controllers
             _logger = logger;
         }
 
+        [Authorize]
         public IActionResult Index()
         {
+            Response.Headers["Cache-Control"] = "no-store, must-revalidate";
+
             return View();
         }
 

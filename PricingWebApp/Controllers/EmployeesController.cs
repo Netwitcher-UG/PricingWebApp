@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PricingWebApp.Data;
 using PricingWebApp.Models;
@@ -13,6 +14,7 @@ namespace PricingWebApp.Controllers
             _context = context;
         }
         //=============== Employees/Table ============
+      //  [Authorize(Roles = "Admin")]
         public IActionResult EmployeesTable()
         {
             ViewData["reopenPopupNew"] = null;
@@ -31,6 +33,7 @@ namespace PricingWebApp.Controllers
         
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> NewEmployee(Employees employee)
         {
             if (ModelState.IsValid)
