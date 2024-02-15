@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using PricingWebApp.Data;
 using PricingWebApp.Models;
@@ -64,6 +65,7 @@ namespace PricingWebApp.Controllers
             };
             return myModel;
         }
+        [Authorize]
         [HttpGet]
         public IActionResult CalculationPage()
         {
