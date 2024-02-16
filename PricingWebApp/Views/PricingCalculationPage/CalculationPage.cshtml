@@ -8,6 +8,12 @@
         margin:auto;
         display:inline;
     }
+    @@media (max-width: 350px){
+        .content form input[type="submit"]{
+            width: 70% !important;
+        }
+
+    }
 </style>
 
 <!-- Main content -->
@@ -24,7 +30,7 @@
             <partial name="_EmployeesSelection" />
             <partial name="_ServicesSelection" />
         </div>
-        <partial name="_ProfitAndDiscounts" />
+        <partial name="_ProfitAndDiscounts" style="width:100%"/>
         
         <input type="submit" value="calculate price" class="btn btn-block btn-success btn-lg" style="width:300px;margin:50px auto;" />
         <partial name="_PackagesSelection" />

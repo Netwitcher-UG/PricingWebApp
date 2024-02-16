@@ -1,6 +1,17 @@
 ﻿@using static PricingWebApp.Controllers.PricingCalculationPageController
 @model MyPagesModels
-
+<style>
+ @@media (max-width: 600px) {
+     #ProfitAndDiscountsfeilds tr td .input-group{
+         width:100% !important;
+     }
+ }
+ @@media (max-width: 400px) {
+     #ProfitAndDiscountsfeilds tr td input{
+         width:60% !important;
+     }
+ }
+</style>
 
 <div class="card" style="width:100%;background:#fff;" id="pricingServicesCard">
     <table class="table table-bordered text-center" id="pricingServicesTable">

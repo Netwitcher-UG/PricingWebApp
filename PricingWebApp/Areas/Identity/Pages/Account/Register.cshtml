@@ -19,7 +19,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 65vh;
+            
             background-color: #f6f5f7;
             
         }
@@ -70,6 +70,38 @@
             border-radius: 5px;
             color: #fff;
         }
+        @@media only screen and (max-width: 420px) {
+         .container .login-page .register-box{
+             width:90vw !important;
+         }
+        
+        }
+        @@media only screen and (min-height: 600px) {
+         .login-page{
+             height: 65vh;
+         }
+        
+        }
+        @@media only screen and (max-height: 600px) {
+         .container .login-page .register-box .form-container{
+             
+             font-size:10px !important;
+         }
+         .register-logo img{
+             width:150px !important;
+         }
+         body {
+             overflow-y: scroll !important;
+             
+         }
+        
+        }
+        @@media only screen and (max-height: 400px){
+            .container{
+               margin-top:150px;
+               margin-bottom:200px
+            }
+        }
     </style>
 
 
@@ -78,7 +110,7 @@
         <div class="login-page">
             <div class="register-box">
                 <div class="register-logo">
-                    <img src="/images/logo1.png" alt="Logo" class="img-fluid" style="width:260px; height: 60px;" />
+                    <img src="/images/logo1.png" alt="Logo" class="img-fluid" style="width:260px;" />
                 </div>
                 <div class="form-container">
                     <form id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">

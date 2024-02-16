@@ -144,8 +144,8 @@ body.sidebar-collapse .brand-link {
     }
 }
 
-@media (min-width: 901px) {
-    #example1 thead, tbody, tfoot {
-        font-size: 18px !important;
+    @media (min-width: 901px) {
+        #example1 thead, tbody, tfoot {
+            font-size: 18px !important;
+        }
     }
-}

@@ -53,6 +53,12 @@
         .brand-link .brand-image {
             margin-right: 1rem;
         }
+        @@media (max-width: 400px) {
+            #my-main-footer {
+                text-align: center !important;
+        
+            }
+        }
     </style>
     <!-- Editing style -->
     <link rel="stylesheet" href="~/dist/css/handlingPages.css">
@@ -388,7 +394,7 @@
         </div>
         <!-- /.content-wrapper -->
         @using System.Reflection
-        <footer class="main-footer">
+        <footer class="main-footer" id="my-main-footer">
             <strong><img src="~/dist/img/Pricing_WebApp_Logo.png" width="30px"/>Copyright &copy; 2024 <a href="https://netwitcher.com"> NetWitcher </a>.</strong>
             All rights reserved.
             <div class="float-right d-none d-sm-inline-block">
